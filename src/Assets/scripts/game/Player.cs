@@ -33,8 +33,9 @@ public class Player : MonoBehaviour {
     float scaleFactor = 0;
 
     if (GameConfig.controlByPress) {
-      bool scaleUp = !Input.GetMouseButton(0);
+      //bool scaleUp = !Input.GetMouseButton(0);
 
+	  bool scaleUp = !Input.GetButton("SimpleButton");
 
       if (!scaleUp && currentLocalScale > GameConfig.playerMinScale) {
         scaleFactor = -GameConfig.playerScaleDownFactor;
@@ -43,7 +44,9 @@ public class Player : MonoBehaviour {
       }
       transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
     } else {
-      if (Input.GetMouseButtonDown(0)) {
+      //if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetButtonDown("SimpleButton")) {
+					
         Debug.Log("One button control");
         if (currentLocalScale > GameConfig.playerMinScale) {
           scaleFactor = -GameConfig.playerScaleDownFactorSP;
