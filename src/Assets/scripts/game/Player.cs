@@ -18,13 +18,13 @@ public class Player : MonoBehaviour {
 
   public List<Follower> Followers { get; private set; }
 
-  public List<Transform> FollowerTransforms { get; private set; }
+  public Dictionary<Follower, Transform> FollowerTransforms { get; private set; }
 
   public void Awake() {
     GameConfig = GameController.Instance.GameConfig;
     rigidBody = GetComponent<Rigidbody2D>();
     Followers = new List<Follower>();
-    FollowerTransforms = new List<Transform>();
+    FollowerTransforms = new Dictionary<Follower, Transform>();
   }
 
   // Update is called once per frame
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
     if (GameConfig.controlByPress) {
       //bool scaleUp = !Input.GetMouseButton(0);
 
-	  bool scaleUp = !Input.GetButton("SimpleButton");
+      bool scaleUp = !Input.GetButton("SimpleButton");
 
       if (!scaleUp && currentLocalScale > GameConfig.playerMinScale) {
         scaleFactor = -GameConfig.playerScaleDownFactor;
@@ -45,7 +45,8 @@ public class Player : MonoBehaviour {
       transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
     } else {
       //if (Input.GetMouseButtonDown(0)) {
-		if (Input.GetButtonDown("SimpleButton")) {        if (currentLocalScale > GameConfig.playerMinScale) {
+      if (Input.GetButtonDown("SimpleButton")) {
+        if (currentLocalScale > GameConfig.playerMinScale) {
           scaleFactor = -GameConfig.playerScaleDownFactorSP;
           transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
         }
@@ -105,22 +106,28 @@ public class Player : MonoBehaviour {
 
     GameObject goFollowerTransform = new GameObject("follower_mount") as GameObject;
     goFollowerTransform.transform.SetParent(transformFollowers);
-    FollowerTransforms.Add(goFollowerTransform.transform);
+    FollowerTransforms[follower] = goFollowerTransform.transform;
 
     follower.AttachToCircle(goFollowerTransform.transform, snap);
   }
 
   public void RemoveFollower(Follower follower) {
     Debug.Log("Removing follower " + follower.name);
-    FollowerTransforms.RemoveAt(0);
-    follower.RemoveFromCircle();
-    Followers.Remove(follower);
+    if(FollowerTransforms.ContainsKey(follower)) {
+      GameObject.Destroy(FollowerTransforms[follower].gameObject);
+      FollowerTransforms.Remove(follower);
+      
+      follower.RemoveFromCircle();
+      Followers.Remove(follower);
+    }
   }
 
   public void ClearFollowers() {
     Followers.ForEach(follower => GameObject.Destroy(follower.gameObject));
     Followers.Clear();
-    FollowerTransforms.ForEach(t => GameObject.Destroy(t.gameObject));
+    foreach (var transform in FollowerTransforms.Values) {
+       GameObject.Destroy(transform.gameObject);
+    }
     FollowerTransforms.Clear();
   }
 
@@ -136,9 +143,11 @@ public class Player : MonoBehaviour {
       float x = Mathf.Sin(angle);
       float y = Mathf.Cos(angle);
 
-      FollowerTransforms[i].name = "follower_mount_" + i;
-      FollowerTransforms[i].localPosition = new Vector2(x, y);
-      FollowerTransforms[i].rotation = Quaternion.Euler(0, 0, -angle * Mathf.Rad2Deg);
+      Follower follower = Followers[i];
+
+      FollowerTransforms[follower].name = "follower_mount_" + i;
+      FollowerTransforms[follower].localPosition = new Vector2(x, y);
+      FollowerTransforms[follower].rotation = Quaternion.Euler(0, 0, -angle * Mathf.Rad2Deg);
     }
 
     Followers.ForEach(follower => {

@@ -14,6 +14,8 @@ public class Follower : MonoBehaviour {
 
   private Dictionary<Transform, LineRenderer> LineRenderers { get; set; }
 
+  private bool IsMoving { get; set; }
+
   public void Awake() {
     LineRenderers = new Dictionary<Transform, LineRenderer>();
   }
@@ -37,10 +39,16 @@ public class Follower : MonoBehaviour {
   }
 
   private IEnumerator MoveIntoCircle(Transform transformInCircle) {
+    while (IsMoving) {
+      yield return null;
+    }
+    IsMoving = true;
+
     var gameConfig = GameController.Instance.GameConfig;
     var startPosition = transform.position;
-    var distance = Vector3.Distance(startPosition, transformInCircle.position);
-    var duration = distance / gameConfig.followersMovementSpeed;
+    //var distance = Vector3.Distance(startPosition, transformInCircle.position);
+    var duration = gameConfig.followersMovementDuration;
+    
     float timeTaken = 0;
     while (timeTaken < duration) {
 
@@ -54,6 +62,7 @@ public class Follower : MonoBehaviour {
     }
 
     TransformInCircle = transformInCircle;
+    IsMoving = false;
   }
 
   public void RecreateLineRenderers() {
