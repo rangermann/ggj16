@@ -16,28 +16,39 @@ public class Follower : MonoBehaviour {
     TransformInCircle = transformInCircle;
     if (snap) {
       transform.position = TransformInCircle.position;
+    } else {
+      MoveToPosition();
     }
   }
 
-  //private IEnumerator MoveIntoCircle(Transform transformInCircle) {
-  //  var gameConfig = GameController.Instance.GameConfig;
-  //  var startPosition = transform.position;
-  //  var distance = Vector3.Distance(startPosition, transformInCircle.position);
-  //  var duration = distance / gameConfig.followersMovementSpeed;
-  //  float timeTaken = 0;
-  //  while (timeTaken < duration) {
+  public void MoveToPosition() {
+    if (TransformInCircle == null) {
+      return;
+    }
+    var transformInCircle = TransformInCircle;
+    TransformInCircle = null;
+    StartCoroutine(MoveIntoCircle(transformInCircle));
+  }
 
-  //    var currentPosition = Vector3.Lerp(startPosition, transformInCircle.position, gameConfig.followersMovementCurve.Evaluate(timeTaken / duration));
-  //    transform.position = currentPosition;
+  private IEnumerator MoveIntoCircle(Transform transformInCircle) {
+    var gameConfig = GameController.Instance.GameConfig;
+    var startPosition = transform.position;
+    var distance = Vector3.Distance(startPosition, transformInCircle.position);
+    var duration = distance / gameConfig.followersMovementSpeed;
+    float timeTaken = 0;
+    while (timeTaken < duration) {
 
-  //    UpdateLineRenderers();
+      var currentPosition = Vector3.Lerp(startPosition, transformInCircle.position, (timeTaken / duration));
+      transform.position = currentPosition;
 
-  //    timeTaken += Time.deltaTime;
-  //    yield return null;
-  //  }
+      UpdateLineRenderers();
 
-  //  TransformInCircle = transformInCircle;
-  //}
+      timeTaken += Time.deltaTime;
+      yield return null;
+    }
+
+    TransformInCircle = transformInCircle;
+  }
 
   public void RecreateLineRenderers() {
 
@@ -89,7 +100,8 @@ public class Follower : MonoBehaviour {
 
   public void Update() {
     if (TransformInCircle != null) {
-      transform.position = Vector3.Lerp(transform.position, TransformInCircle.position, GameController.Instance.GameConfig.followersMovementSpeed * Time.deltaTime);
+      transform.position = TransformInCircle.position;
+      //transform.position = Vector3.Lerp(transform.position, TransformInCircle.position, GameController.Instance.GameConfig.followersMovementSpeed * Time.deltaTime);
       UpdateLineRenderers();
     }
   }

@@ -139,6 +139,9 @@ public class Player : MonoBehaviour {
       FollowerTransforms[i].localPosition = new Vector2(x, y);
     }
 
-    Followers.ForEach(follower => follower.RecreateLineRenderers());
+    Followers.ForEach(follower => {
+      follower.RecreateLineRenderers();
+      follower.MoveToPosition();
+    });
   }
 }
