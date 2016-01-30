@@ -48,6 +48,7 @@ MonoBehaviour:
   playerMaxVelocityDelta: 2
   playerMaxCameraOffset: 4
   playerScaleImpact: 1.5
+  controlByPress: 1
   followersMin: 3
   followersToWin: 10
 --- !u!1001 &100100000

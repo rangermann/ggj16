@@ -29,35 +29,56 @@ public class Player : MonoBehaviour {
   // Update is called once per frame
   public void Update() {
     float currentLocalScale = GetScale();
-    bool scaleUp = !Input.GetMouseButton(0);
-
     float scaleFactor = 0;
 
-    if (!scaleUp && currentLocalScale > GameConfig.playerMinScale) {
-      scaleFactor = -GameConfig.playerScaleDownFactor;
-    } else if (scaleUp && currentLocalScale < GameConfig.playerMaxScale) {
-      scaleFactor = GameConfig.playerScaleUpFactor;
-    }
+    if (GameConfig.controlByPress) {
+      bool scaleUp = !Input.GetMouseButton(0);
 
-    transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+
+      if (!scaleUp && currentLocalScale > GameConfig.playerMinScale) {
+        scaleFactor = -GameConfig.playerScaleDownFactor;
+      } else if (scaleUp && currentLocalScale < GameConfig.playerMaxScale) {
+        scaleFactor = GameConfig.playerScaleUpFactor;
+      }
+      transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+    } else {
+      if (Input.GetMouseButtonDown(0)) {
+        Debug.Log("One button control");
+        if (currentLocalScale > GameConfig.playerMinScale) {
+          scaleFactor = -GameConfig.playerScaleDownFactor;
+          transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+        }
+      } else {
+        if (currentLocalScale < GameConfig.playerMaxScale) {
+          scaleFactor = GameConfig.playerScaleUpFactor;
+          transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+        }
+      }
+      //transform.localScale += new Vector3 (scaleFactor  Time.deltaTime, scaleFactor  Time.deltaTime, 0);
+    }
   }
 
-	public void FixedUpdate (){
-    float normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
+  public void FixedUpdate() {
+    float normedScale = 1 - (GetScale() * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
     float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
-    bool tooFar = GetCameraX () + GameConfig.playerMaxCameraOffset < GetCurrentX ();
+
+    if (!(GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX() || speedVariation < GameConfig.cameraMovementSpeed)) {
+      speedVariation = 0.0f;
+    }
+
+    bool tooFar = GetReferenceX() + GameConfig.playerMaxCameraOffset < GetCurrentX();
 
     if (tooFar && speedVariation > 0) {
       speedVariation = 0.0f;
     }
 
-		Vector2 velocity = rigidBody.velocity;
-		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
-		rigidBody.velocity = velocity;
-	}
+    Vector2 velocity = rigidBody.velocity;
+    velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
+    rigidBody.velocity = velocity;
+  }
 
-  private float GetCameraX() {
+  private float GetReferenceX() {
     Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
     //Debug.Log ("Current cPos: " + cameraPosition.x);
@@ -87,6 +108,7 @@ public class Player : MonoBehaviour {
 
     follower.AttachToCircle(goFollowerTransform.transform);
   }
+
 
   public void RemoveFollower(Follower follower) {
     Debug.Log("Removing follower " + follower.name);
