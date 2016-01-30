@@ -9,8 +9,7 @@ public class GameStatePlaying : AbstractState {
   private Transform TransformLevelCamera { get; set; }
 
   private GameConfig GameConfig { get; set; }
-
-  private Player Player { get; set; }
+ 
 
   public GameStatePlaying(string stateName)
     : base(stateName) {
@@ -38,8 +37,8 @@ public class GameStatePlaying : AbstractState {
 
   protected override void OnLeave() {
     // kill the player
-    Player.ClearFollowers();
-    GameObject.Destroy(Player.gameObject);
+    GameController.Instance.Player.ClearFollowers();
+    GameObject.Destroy(GameController.Instance.Player.gameObject);
   }
 
   protected override void OnUpdate() {
@@ -61,14 +60,16 @@ public class GameStatePlaying : AbstractState {
 
   private void SpawnPlayer() {
     GameObject goPlayer = GameObject.Instantiate(GameController.Instance.PrefabPlayer, Vector3.zero, Quaternion.identity) as GameObject;
-    Player = goPlayer.GetComponent<Player>();
+    Player player = goPlayer.GetComponent<Player>();
 
     // add initial followers
     for (int i = 0; i < GameConfig.followersMin; i++) {
       GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
       Follower follower = goFollower.GetComponent<Follower>();
-      Player.AddFollower(follower);
+      player.AddFollower(follower);
     }
-    Player.RegroupFollowers();
+    player.RegroupFollowers();
+
+    GameController.Instance.Player = player;
   }
 }

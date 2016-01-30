@@ -158,7 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformFollowers: {fileID: 456120}
-  transformCircleVis: {fileID: 451506}
   velocity: {x: 0, y: 0}
 --- !u!212 &21283648
 SpriteRenderer:
