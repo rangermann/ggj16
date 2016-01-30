@@ -38,11 +38,18 @@ public class GameStatePlaying : AbstractState {
 
   protected override void OnLeave() {
     // kill the player
+    Player.ClearFollowers();
     GameObject.Destroy(Player.gameObject);
   }
 
   protected override void OnUpdate() {
     MoveCamera();
+
+    //if (Player.Followers.Count < GameConfig.followersMin) {
+    //  GameController.Instance.ChangeState("GameStateGameOver");
+    //} else if (Player.Followers.Count >= GameConfig.followersToWin) {
+    //  GameController.Instance.ChangeState("GameStateLevelFinished");
+    //}
   }
 
   private void MoveCamera() {
@@ -54,6 +61,14 @@ public class GameStatePlaying : AbstractState {
 
   private void SpawnPlayer() {
     GameObject goPlayer = GameObject.Instantiate(GameController.Instance.PrefabPlayer, Vector3.zero, Quaternion.identity) as GameObject;
-    Player = goPlayer.GetComponent<Player>(); 
+    Player = goPlayer.GetComponent<Player>();
+
+    // add initial followers
+    for (int i = 0; i < GameConfig.followersMin; i++) {
+      GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
+      Follower follower = goFollower.GetComponent<Follower>();
+      Player.AddFollower(follower);
+    }
+    Player.RegroupFollowers();
   }
 }

@@ -14,5 +14,9 @@ public class GameConfig : MonoBehaviour {
   public float playerMaxVelocityDelta = 0.4f;
   public float playerMaxCameraOffset = 4f;
   public float playerScaleImpact = 1.5f;
+
+  [Header("Followers")]
+  public int followersMin = 3;
+  public int followersToWin = 10;
 }
 

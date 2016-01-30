@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour {
   private GameObject prefabPlayer;
 
   [SerializeField]
+  private GameObject prefabFollower;
+
+  [SerializeField]
   private Transform transformLevelCamera;
 
   [SerializeField]
@@ -34,6 +37,12 @@ public class GameController : MonoBehaviour {
   public GameObject PrefabPlayer {
     get {
       return prefabPlayer;
+    }
+  }
+
+  public GameObject PrefabFollower {
+    get {
+      return prefabFollower;
     }
   }
 
@@ -63,6 +72,7 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStateLoading("GameStateLoading"));
     states.Add(new GameStatePlaying("GameStatePlaying"));
     states.Add(new GameStateGameOver("GameStateGameOver"));
+    states.Add(new GameStateLevelFinished("GameStateLevelFinished"));
     // add more game states here
 
     StateMachine = StateMachine.Create("state_machine", states, "GameStatePlaying");

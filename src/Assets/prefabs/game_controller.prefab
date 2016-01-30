@@ -40,8 +40,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPlayer: {fileID: 134932, guid: 46eb7e9bb7403f94a92439565e933b4d, type: 2}
+  prefabFollower: {fileID: 135694, guid: 5bd09963ad9f6a1499d936e8e59b004e, type: 2}
   transformLevelCamera: {fileID: 0}
   gameConfig: {fileID: 0}
+  levelGenerator: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
