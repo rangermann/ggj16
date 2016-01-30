@@ -35,6 +35,12 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private Background background;
 
+  [SerializeField]
+  private GameObject startScreen;
+
+  [SerializeField]
+  private GameObject endScreen;
+
   #endregion
 
   private static GameController instance;
@@ -105,6 +111,18 @@ public class GameController : MonoBehaviour {
     }
   }
 
+	public GameObject StartScreen {
+		get {
+			return startScreen;
+		}
+	}
+
+	public GameObject EndScreen {
+		get {
+			return endScreen;
+		}
+	}
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(transform.parent.gameObject);
@@ -116,7 +134,7 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStateLevelFinished("GameStateLevelFinished"));
     // add more game states here
 
-    StateMachine = StateMachine.Create("state_machine", states, "GameStatePlaying");
+		StateMachine = StateMachine.Create("state_machine", states, "GameStateLoading");
   }
 
   public void ChangeState(string stateName, object onEnterParams = null) {
