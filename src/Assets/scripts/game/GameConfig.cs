@@ -4,7 +4,6 @@ public class GameConfig : MonoBehaviour {
 
   [Header("Camera")]
   public float cameraMovementSpeed = 5.0f;
-  public float cameraVisibleWidth = 5.0f;
 
   [Header("Player")]
   public float playerScaleDownFactor = 0.5f;
