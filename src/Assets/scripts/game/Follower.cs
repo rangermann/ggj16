@@ -103,6 +103,8 @@ public class Follower : MonoBehaviour {
       transform.position = TransformInCircle.position;
       //transform.position = Vector3.Lerp(transform.position, TransformInCircle.position, GameController.Instance.GameConfig.followersMovementSpeed * Time.deltaTime);
       UpdateLineRenderers();
+
+      transform.rotation = TransformInCircle.rotation;
     }
   }
 

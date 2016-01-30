@@ -42,6 +42,7 @@ MonoBehaviour:
   sectionPrefabs:
   - {fileID: 128552, guid: b4a030534185f48caafa5c8f8eccce11, type: 2}
   - {fileID: 140478, guid: b990729682dcd415f90e8fd54aecb7e7, type: 2}
+  - {fileID: 180556, guid: cbd68fc2cb39d4f14bbeb7a8c82660e8, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
