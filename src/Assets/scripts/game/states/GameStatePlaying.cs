@@ -44,12 +44,14 @@ public class GameStatePlaying : AbstractState {
   protected override void OnUpdate() {
     MoveCamera();
 
-    // TODO: enable
-    //if (Player.Followers.Count < GameConfig.followersMin) {
-    //  GameController.Instance.ChangeState("GameStateGameOver");
-    //} else if (Player.Followers.Count >= GameConfig.followersToWin) {
-    //  GameController.Instance.ChangeState("GameStateLevelFinished");
-    //}
+    if (GameConfig.enableWinLoseConditions) {
+      var player = GameController.Instance.Player;
+      if (player.Followers.Count < GameConfig.followersMin) {
+        GameController.Instance.ChangeState("GameStateGameOver");
+      } else if (player.Followers.Count >= GameConfig.followersToWin) {
+        GameController.Instance.ChangeState("GameStateLevelFinished");
+      }
+    }
   }
 
   private void MoveCamera() {
@@ -69,7 +71,7 @@ public class GameStatePlaying : AbstractState {
     for (int i = 0; i < GameConfig.followersMin; i++) {
       GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
       Follower follower = goFollower.GetComponent<Follower>();
-      player.AddFollower(follower);
+      player.AddFollower(follower, true);
     }
     player.RegroupFollowers();
   }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour {
     return transform.position.x;
   }
 
-  public void AddFollower(Follower follower) {
+  public void AddFollower(Follower follower, bool snap = false) {
     string followerName = "follower_" + (Followers.Count + 1);
     Debug.Log("Adding follower");
     follower.name = followerName;
@@ -106,9 +107,8 @@ public class Player : MonoBehaviour {
     goFollowerTransform.transform.SetParent(transformFollowers);
     FollowerTransforms.Add(goFollowerTransform.transform);
 
-    follower.AttachToCircle(goFollowerTransform.transform);
+    follower.AttachToCircle(goFollowerTransform.transform, snap);
   }
-
 
   public void RemoveFollower(Follower follower) {
     Debug.Log("Removing follower " + follower.name);
@@ -139,6 +139,9 @@ public class Player : MonoBehaviour {
       FollowerTransforms[i].localPosition = new Vector2(x, y);
     }
 
-    Followers.ForEach(follower => follower.RecreateLineRenderers());
+    Followers.ForEach(follower => {
+      follower.RecreateLineRenderers();
+      follower.MoveToPosition();
+    });
   }
 }
