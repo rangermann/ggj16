@@ -25,6 +25,7 @@ public class GameConfig : MonoBehaviour {
   public int followersMin = 3;
   public int followersToWin = 10;
   public float followersMovementSpeed = 2;
+  public float followersLineMovementSpeed = 1f;
 
   [Header("Background")]
   public float backgroundWidth = 29.0f;

@@ -91,8 +91,15 @@ public class Follower : MonoBehaviour {
   private void UpdateLineRenderPositions(Transform followerTransform) {
     if (LineRenderers.ContainsKey(followerTransform)) {
       var lineRenderer = LineRenderers[followerTransform];
-      lineRenderer.SetPosition(0, new Vector3(transform.position.x, transform.position.y, lineRenderer.transform.position.z));
-      lineRenderer.SetPosition(1, new Vector3(followerTransform.position.x, followerTransform.position.y, lineRenderer.transform.position.z));
+      Vector3 position0 = new Vector3(transform.position.x, transform.position.y, lineRenderer.transform.position.z);
+      Vector3 position1 = new Vector3(followerTransform.position.x, followerTransform.position.y, lineRenderer.transform.position.z);
+      lineRenderer.SetPosition(0, position0);
+      lineRenderer.SetPosition(1, position1);
+      Vector2 mainTextureOffset = lineRenderer.material.mainTextureOffset;
+      mainTextureOffset.x += GameController.Instance.GameConfig.followersLineMovementSpeed * Time.deltaTime;
+      lineRenderer.material.mainTextureOffset = mainTextureOffset;
+      float distance = Vector3.Distance(position0, position1);
+      lineRenderer.material.mainTextureScale = new Vector2(distance / 1.0f, 1);
     }
   }
 
