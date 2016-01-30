@@ -48,16 +48,21 @@ MonoBehaviour:
   playerMaxScale: 5
   playerMinVelocityDelta: -3
   playerMaxVelocityDelta: 2
+  playerPushVelocityDelta: 10
+  playerScaleAfterPush: {x: 1, y: 1, z: 1}
   playerMaxCameraOffset: 4
   playerScaleImpact: 1.5
   controlByPress: 0
   enableWinLoseConditions: 1
   followersMin: 3
   followersToWin: 10
-  followersMovementSpeed: 10
+  followersMovementSpeed: 6
+  followersLineMovementSpeed: 2
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5
+  levelGeneratorTrapsPerSection: 2
+  levelGeneratorFollowersPerSection: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

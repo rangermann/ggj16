@@ -14,6 +14,8 @@ public class Follower : MonoBehaviour {
 
   private Dictionary<Transform, LineRenderer> LineRenderers { get; set; }
 
+  private bool IsMoving { get; set; }
+
   public void Awake() {
     LineRenderers = new Dictionary<Transform, LineRenderer>();
   }
@@ -37,10 +39,16 @@ public class Follower : MonoBehaviour {
   }
 
   private IEnumerator MoveIntoCircle(Transform transformInCircle) {
+    while (IsMoving) {
+      yield return null;
+    }
+    IsMoving = true;
+
     var gameConfig = GameController.Instance.GameConfig;
     var startPosition = transform.position;
-    var distance = Vector3.Distance(startPosition, transformInCircle.position);
-    var duration = distance / gameConfig.followersMovementSpeed;
+    //var distance = Vector3.Distance(startPosition, transformInCircle.position);
+    var duration = gameConfig.followersMovementDuration;
+    
     float timeTaken = 0;
     while (timeTaken < duration) {
 
@@ -54,6 +62,7 @@ public class Follower : MonoBehaviour {
     }
 
     TransformInCircle = transformInCircle;
+    IsMoving = false;
   }
 
   public void RecreateLineRenderers() {
@@ -91,8 +100,15 @@ public class Follower : MonoBehaviour {
   private void UpdateLineRenderPositions(Transform followerTransform) {
     if (LineRenderers.ContainsKey(followerTransform)) {
       var lineRenderer = LineRenderers[followerTransform];
-      lineRenderer.SetPosition(0, new Vector3(transform.position.x, transform.position.y, lineRenderer.transform.position.z));
-      lineRenderer.SetPosition(1, new Vector3(followerTransform.position.x, followerTransform.position.y, lineRenderer.transform.position.z));
+      Vector3 position0 = new Vector3(transform.position.x, transform.position.y, lineRenderer.transform.position.z);
+      Vector3 position1 = new Vector3(followerTransform.position.x, followerTransform.position.y, lineRenderer.transform.position.z);
+      lineRenderer.SetPosition(0, position0);
+      lineRenderer.SetPosition(1, position1);
+      Vector2 mainTextureOffset = lineRenderer.material.mainTextureOffset;
+      mainTextureOffset.x += GameController.Instance.GameConfig.followersLineMovementSpeed * Time.deltaTime;
+      lineRenderer.material.mainTextureOffset = mainTextureOffset;
+      float distance = Vector3.Distance(position0, position1);
+      lineRenderer.material.mainTextureScale = new Vector2(distance / 1.0f, 1);
     }
   }
 
