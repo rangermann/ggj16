@@ -352,11 +352,11 @@ Prefab:
     - target: {fileID: 11470998, guid: 0ad767d68309ce041a75ad390af969a0, type: 2}
       propertyPath: sectionPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 141006, guid: 67ec7284f68f2486a8f05298d1c798c7, type: 2}
+      objectReference: {fileID: 140478, guid: b990729682dcd415f90e8fd54aecb7e7, type: 2}
     - target: {fileID: 11470998, guid: 0ad767d68309ce041a75ad390af969a0, type: 2}
       propertyPath: sectionPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 141006, guid: 67ec7284f68f2486a8f05298d1c798c7, type: 2}
+      objectReference: {fileID: 128552, guid: b4a030534185f48caafa5c8f8eccce11, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ad767d68309ce041a75ad390af969a0, type: 2}
   m_IsPrefabParent: 0
