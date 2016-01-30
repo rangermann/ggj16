@@ -105,6 +105,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 410826}
   - 61: {fileID: 6195374}
+  - 61: {fileID: 6160554}
+  - 61: {fileID: 6174954}
   m_Layer: 13
   m_Name: Level Section 6
   m_TagString: Untagged
@@ -516,6 +518,34 @@ PolygonCollider2D:
       - {x: 18.134998, y: -1.0714525}
       - {x: 18.134998, y: -1.0537425}
       - {x: 17.993319, y: -0.9120629}
+--- !u!61 &6160554
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 17.826668, y: 5.5}
+  serializedVersion: 2
+  m_Size: {x: 35.653336, y: 1}
+--- !u!61 &6174954
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 17.826668, y: -5.5}
+  serializedVersion: 2
+  m_Size: {x: 35.653336, y: 1}
 --- !u!61 &6195374
 BoxCollider2D:
   m_ObjectHideFlags: 1

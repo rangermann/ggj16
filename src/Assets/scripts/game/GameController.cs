@@ -15,6 +15,12 @@ public class GameController : MonoBehaviour {
   private GameObject prefabFollower;
 
   [SerializeField]
+  private GameObject prefabFollowerObstacle;
+
+  [SerializeField]
+  private GameObject prefabTrapObstacle;
+
+  [SerializeField]
   private Transform transformLevelCamera;
 
   [SerializeField]
@@ -78,6 +84,18 @@ public class GameController : MonoBehaviour {
   public GameObject PrefabFollowerLineRenderer {
     get {
       return prefabFollowerLineRenderer;
+    }
+  }
+
+  public GameObject PrefabFollowerObstacle {
+    get {
+      return prefabFollowerObstacle;
+    }
+  }
+
+  public GameObject PrefabTrapObstacle {
+    get {
+      return prefabTrapObstacle;
     }
   }
 

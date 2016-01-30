@@ -31,7 +31,9 @@ public class GameConfig : MonoBehaviour {
   public float backgroundWidth = 29.0f;
   public float backgroundScrollSpeed = 0.5f;
 
-  [Header("LevelGenerator")]
+  [Header("Level Generator")]
   public float levelGeneratorSectionPadding = 5.0f;
+  public int levelGeneratorTrapsPerSection = 2;
+  public int levelGeneratorFollowersPerSection = 4;
 }
 
