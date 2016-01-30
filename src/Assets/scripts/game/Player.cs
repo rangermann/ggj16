@@ -45,12 +45,12 @@ public class Player : MonoBehaviour {
       if (Input.GetMouseButtonDown(0)) {
         Debug.Log("One button control");
         if (currentLocalScale > GameConfig.playerMinScale) {
-          scaleFactor = -GameConfig.playerScaleDownFactor;
+          scaleFactor = -GameConfig.playerScaleDownFactorSP;
           transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
         }
       } else {
         if (currentLocalScale < GameConfig.playerMaxScale) {
-          scaleFactor = GameConfig.playerScaleUpFactor;
+          scaleFactor = GameConfig.playerScaleUpFactorSP;
           transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
         }
       }
