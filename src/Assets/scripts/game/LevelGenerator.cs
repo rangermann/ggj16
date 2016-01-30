@@ -14,6 +14,7 @@ public class LevelGenerator : MonoBehaviour {
   private List<GameObject> currentSections { get; set; }
   private float sectionStart;
   private float sectionEnd;
+  private bool isFirstSection;
 
   public void Awake() {
     currentSections = new List<GameObject>();
@@ -33,6 +34,7 @@ public class LevelGenerator : MonoBehaviour {
     currentSections.Clear();
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
+    isFirstSection = true;
   }
 
   public void Update() {
@@ -43,7 +45,7 @@ public class LevelGenerator : MonoBehaviour {
     float sectionPadding = GameController.Instance.GameConfig.levelGeneratorSectionPadding;
 
     // Only holds true for first call to Update()
-    if (sectionStart > cameraStart) {
+    if (isFirstSection) {
       sectionStart = cameraStart;
       sectionEnd = cameraStart;
     }
@@ -62,8 +64,10 @@ public class LevelGenerator : MonoBehaviour {
 
       List<GameObject> spawnList = new List<GameObject> ();
 
-      for (int i = 0; i < gameConfig.levelGeneratorTrapsPerSection; i++) {
-        spawnList.Add (GameController.Instance.PrefabTrapObstacle);
+      if (!isFirstSection) {
+        for (int i = 0; i < gameConfig.levelGeneratorTrapsPerSection; i++) {
+          spawnList.Add (GameController.Instance.PrefabTrapObstacle);
+        }
       }
 
       for (int i = 0; i < gameConfig.levelGeneratorFollowersPerSection; i++) {
@@ -93,6 +97,8 @@ public class LevelGenerator : MonoBehaviour {
         sectionRemoved = true;
       }
     } while (sectionRemoved);
+
+    isFirstSection = false;
   }
 
  

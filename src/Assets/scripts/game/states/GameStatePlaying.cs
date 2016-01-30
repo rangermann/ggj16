@@ -29,7 +29,7 @@ public class GameStatePlaying : AbstractState {
     SpawnPlayer();
 
     // start level generation
-    int seed = 234234; // TODO: use seed from onEnterParams
+    int seed = 1337; // TODO: use seed from onEnterParams
     GameController.Instance.LevelGenerator.CleanUp();
     GameController.Instance.LevelGenerator.StartGenerating(seed);
 
