@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Follower : MonoBehaviour {
 
+  [SerializeField]
+  private float destroyDelaySeconds = 0;
+
+  [SerializeField]
+  private GameObject prefabDestroyEffect;
+
   public Transform TransformInCircle { get; private set; }
 
   private Dictionary<Transform, LineRenderer> LineRenderers { get; set; }
@@ -94,8 +100,10 @@ public class Follower : MonoBehaviour {
     TransformInCircle = null;
     DestroyLineRenderers();
 
-    // TODO: animation etc.
-    GameObject.Destroy(gameObject);
+    if (prefabDestroyEffect != null) {
+      GameObject.Instantiate(prefabDestroyEffect, transform.position, Quaternion.identity);
+    }
+    GameObject.Destroy(gameObject, destroyDelaySeconds);
   }
 
   public void Update() {

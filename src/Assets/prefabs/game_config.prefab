@@ -57,6 +57,7 @@ MonoBehaviour:
   followersMovementSpeed: 10
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
+  levelGeneratorSectionPadding: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
