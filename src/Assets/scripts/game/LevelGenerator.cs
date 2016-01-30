@@ -10,31 +10,85 @@ public class LevelGenerator : MonoBehaviour {
 
   #endregion
 
-  private List<GameObject> CurrentSections { get; set; }
+  private List<GameObject> currentSections { get; set; }
+  private float sectionStart;
+  private float sectionEnd;
 
   public void Awake() {
-    CurrentSections = new List<GameObject>();
+    currentSections = new List<GameObject>();
   }
 
   public void StartGenerating(int seed) {
     Random.seed = seed;
-
+    sectionStart = 0.0f;
+    sectionEnd = 0.0f;
   }
 
   public void CleanUp() {
     // TODO delete all level elements
+    currentSections.ForEach (delegate(GameObject obj) {
+      RemoveSection(obj);
+    });
 
-
-    CurrentSections.Clear();
+    currentSections.Clear();
+    sectionStart = 0.0f;
+    sectionEnd = 0.0f;
   }
 
   public void Update() {
-    // add/remove elements
+    Camera mainCamera = Camera.main;
+    Vector3 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
-    // add:
-    // GameObject.Instantiate(randomPrefab);
+    float xDist = mainCamera.aspect * mainCamera.orthographicSize; 
 
-    // remove:
-    //GameObject.Destroy(section);
+    float cameraStart = cameraPosition.x - xDist;
+    float cameraEnd = cameraPosition.x + xDist; 
+
+    // Only holds true for first call to Update()
+    if (sectionStart > cameraStart) {
+      sectionStart = cameraStart;
+      sectionEnd = cameraStart;
+    }
+
+    while (sectionEnd < cameraEnd) {
+      int nextLevelIdx = Mathf.RoundToInt(Random.value * (sectionPrefabs.Count - 1));
+      GameObject nextPrefab = sectionPrefabs[nextLevelIdx];
+      GameObject sectionPrefab = GameObject.Instantiate (nextPrefab);
+      float sectionWidth = GetSectionWidth(sectionPrefab);
+
+      currentSections.Add (sectionPrefab);
+
+      sectionPrefab.transform.Translate(new Vector2(sectionEnd + sectionWidth/2, 0.0f));
+      sectionEnd += sectionWidth;
+    }
+
+    bool sectionRemoved;
+    do {
+      sectionRemoved = false;
+
+      if(currentSections.Count == 0) {
+        break;
+      }
+
+      GameObject firstSection = currentSections[0];
+      float sectionWidth = GetSectionWidth(firstSection);
+
+      if (sectionStart + sectionWidth < cameraStart) {
+        RemoveSection(firstSection);
+
+        sectionStart += sectionWidth;
+        sectionRemoved = true;
+      }
+    } while (sectionRemoved);
+  }
+
+  private void RemoveSection (GameObject section) {
+    GameObject.Destroy (section);
+    currentSections.Remove (section);
+  }
+
+  private float GetSectionWidth(GameObject section){
+    // TODO: Return real section width
+    return 2.0f;
   }
 }
