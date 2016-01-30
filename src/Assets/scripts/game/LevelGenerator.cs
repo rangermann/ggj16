@@ -35,13 +35,10 @@ public class LevelGenerator : MonoBehaviour {
   }
 
   public void Update() {
-    Camera mainCamera = Camera.main;
-    Vector3 cameraPosition = GameController.Instance.TransformLevelCamera.position;
+    CameraBounds cameraPosition = GameController.Instance.GetCameraXBounds(); 
 
-    float xDist = mainCamera.aspect * mainCamera.orthographicSize; 
-
-    float cameraStart = cameraPosition.x - xDist;
-    float cameraEnd = cameraPosition.x + xDist; 
+    float cameraStart = cameraPosition.start;
+    float cameraEnd = cameraPosition.end; 
 
     // Only holds true for first call to Update()
     if (sectionStart > cameraStart) {
