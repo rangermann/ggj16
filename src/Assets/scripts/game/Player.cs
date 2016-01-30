@@ -3,21 +3,44 @@
 public class Player : MonoBehaviour {
 
 	public Vector2 velocity;
+	private Rigidbody2D rigidBody;
 
   private GameConfig GameConfig { get; set; }
 
   public void Awake() {
     GameConfig = GameController.Instance.GameConfig;
+	rigidBody = GetComponent<Rigidbody2D>();
   }
 
 	// Update is called once per frame
 	public void Update () {
-    Vector3 translation = new Vector3(GameConfig.cameraMovementSpeed * Time.deltaTime, 0, 0);
-    transform.Translate(translation);
-		if (Input.GetMouseButton (0)) {
-      transform.localScale += new Vector3(-GameConfig.playerScaleDownFactor, -GameConfig.playerScaleDownFactor, 0);
-		} else {
-      transform.localScale += new Vector3(GameConfig.playerScaleUpFactor, GameConfig.playerScaleUpFactor, 0);
+		float currentLocalScale = GetScale();
+		bool scaleUp = Input.GetMouseButton (0);
+
+		float scaleFactor = 0;
+	
+		if (!scaleUp && currentLocalScale > GameConfig.playerMinScale) {
+			scaleFactor = -GameConfig.playerScaleDownFactor;
+		} else if (scaleUp && currentLocalScale < GameConfig.playerMaxScale) {
+			scaleFactor = GameConfig.playerScaleUpFactor;
 		}
+
+		transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+	}
+
+	public void FixedUpdate (){
+
+		float normedScale = 1 - (GetScale () - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
+		float speedVariation = normedScale * (GameConfig.playerRadiusVelocityMaxFactor - GameConfig.playerRadiusVelocityMinFactor) + GameConfig.playerRadiusVelocityMinFactor;
+		
+		Vector2 velocity = rigidBody.velocity;
+		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
+		rigidBody.velocity = velocity;
+	}
+
+
+
+	private float GetScale(){
+		return transform.localScale.x;
 	}
 }
