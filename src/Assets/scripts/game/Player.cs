@@ -46,8 +46,6 @@ public class Player : MonoBehaviour {
   private float GetReferenceX() {
     Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
-    Debug.Log ("Current cPos: " + cameraPosition.x);
-
     return cameraPosition.x;
   }
 
@@ -56,8 +54,6 @@ public class Player : MonoBehaviour {
 	}
 
   private float GetCurrentX() {
-    Debug.Log ("Current x: " + transform.position.x);
-
     return transform.position.x;
   }
 }
