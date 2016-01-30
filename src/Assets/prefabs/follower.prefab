@@ -75,7 +75,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &6104770
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc99704d21a054fa6090ba8fa84c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyDelaySeconds: 0
+  prefabDestroyEffect: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
 --- !u!212 &21256436
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -152,8 +154,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: prefabDestroyEffect
+      value: 
+      objectReference: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135694}

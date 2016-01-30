@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 public class FollowerObstacle : AbstractObstacle {
-  
+  public void Awake() {
+    transform.Rotate (new Vector3(0.0f, 0.0f, Random.value * 360));
+  }
+
   protected override void OnPlayerEnter() {
     AddPlayer ();
   }

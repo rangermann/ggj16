@@ -28,5 +28,7 @@ public class GameConfig : MonoBehaviour {
   public float backgroundWidth = 29.0f;
   public float backgroundScrollSpeed = 0.5f;
 
+  [Header("LevelGenerator")]
+  public float levelGeneratorSectionPadding = 5.0f;
 }
 
