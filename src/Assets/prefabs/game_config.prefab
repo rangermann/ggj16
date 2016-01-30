@@ -42,17 +42,21 @@ MonoBehaviour:
   cameraMovementSpeed: 5
   playerScaleDownFactor: 0.5
   playerScaleUpFactor: 0.7
+  playerScaleDownFactorSP: 8
+  playerScaleUpFactorSP: 0.4
   playerMinScale: 0.5
   playerMaxScale: 5
   playerMinVelocityDelta: -3
   playerMaxVelocityDelta: 2
   playerMaxCameraOffset: 4
   playerScaleImpact: 1.5
-  controlByPress: 1
+  controlByPress: 0
   enableWinLoseConditions: 1
   followersMin: 3
   followersToWin: 10
   followersMovementSpeed: 10
+  backgroundWidth: 29
+  backgroundScrollSpeed: 0.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
