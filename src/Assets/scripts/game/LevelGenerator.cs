@@ -57,7 +57,7 @@ public class LevelGenerator : MonoBehaviour {
 
       currentSections.Add (sectionPrefab);
 
-      sectionPrefab.transform.Translate(new Vector2(sectionEnd + sectionWidth/2, 0.0f));
+      sectionPrefab.transform.Translate(new Vector2(sectionEnd, 0.0f));
       sectionEnd += sectionWidth;
     }
 
