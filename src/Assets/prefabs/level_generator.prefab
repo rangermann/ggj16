@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectionPrefabs:
-  - {fileID: 104032, guid: e8939d4a2c3de6e49873e4300eb458a4, type: 2}
-  - {fileID: 104032, guid: e8939d4a2c3de6e49873e4300eb458a4, type: 2}
+  - {fileID: 197102, guid: e9dfa369f0ee25643b0e8a436294d600, type: 2}
+  - {fileID: 197102, guid: e9dfa369f0ee25643b0e8a436294d600, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
