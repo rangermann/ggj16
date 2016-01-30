@@ -29,14 +29,12 @@ public class Player : MonoBehaviour {
 	}
 
 	public void FixedUpdate (){
-    float speedVariation, normedScale;
-    if (GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX()) {
-      normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
-      speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
-    } else {
-      speedVariation = 0f;
-    }
+    float normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
+    float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
+    if (!(GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX() || speedVariation < GameConfig.cameraMovementSpeed)) {
+      speedVariation = 0.0f;
+    }
 
 		Vector2 velocity = rigidBody.velocity;
 		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
