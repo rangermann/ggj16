@@ -8,6 +8,8 @@ public class GameConfig : MonoBehaviour {
   [Header("Player")]
   public float playerScaleDownFactor = 0.5f; //0.5f for pressing control; else 8 
   public float playerScaleUpFactor = 0.7f; //0.7f for pressing control; else 0..3f 
+  public float playerScaleDownFactorSP = 8f; //for the single pressing opt
+  public float playerScaleUpFactorSP = 0.4f; //for the single pressing opt 
   public float playerMinScale = 0.5f;
   public float playerMaxScale = 5.0f;
   public float playerMinVelocityDelta = -3f;
