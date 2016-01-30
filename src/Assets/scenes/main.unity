@@ -415,14 +415,6 @@ Prefab:
       propertyPath: background
       value: 
       objectReference: {fileID: 347728155}
-    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: prefabTrapObstacle
-      value: 
-      objectReference: {fileID: 122850, guid: f02b1550333b74ec1b91ac0292ae9177, type: 2}
-    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: prefabFollowerObstacle
-      value: 
-      objectReference: {fileID: 199766, guid: 49d5d6a89c4294c01a4503b84521b0a8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
   m_IsPrefabParent: 0
