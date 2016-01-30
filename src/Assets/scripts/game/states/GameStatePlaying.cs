@@ -44,6 +44,7 @@ public class GameStatePlaying : AbstractState {
   protected override void OnUpdate() {
     MoveCamera();
 
+    // TODO: enable
     //if (Player.Followers.Count < GameConfig.followersMin) {
     //  GameController.Instance.ChangeState("GameStateGameOver");
     //} else if (Player.Followers.Count >= GameConfig.followersToWin) {
@@ -65,9 +66,11 @@ public class GameStatePlaying : AbstractState {
     GameController.Instance.Player = player;
 
     // add initial followers
+    Follower follower2 = null;
     for (int i = 0; i < GameConfig.followersMin; i++) {
       GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
       Follower follower = goFollower.GetComponent<Follower>();
+      follower2 = follower;
       player.AddFollower(follower);
     }
     player.RegroupFollowers();

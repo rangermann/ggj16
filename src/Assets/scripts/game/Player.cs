@@ -76,7 +76,9 @@ public class Player : MonoBehaviour {
   }
 
   public void AddFollower(Follower follower) {
+    string followerName = "follower_" + (Followers.Count + 1);
     Debug.Log("Adding follower");
+    follower.name = followerName;
     Followers.Add(follower);
 
     GameObject goFollowerTransform = new GameObject("follower_mount") as GameObject;
@@ -87,12 +89,10 @@ public class Player : MonoBehaviour {
   }
 
   public void RemoveFollower(Follower follower) {
-    Debug.Log("Removing follower");
+    Debug.Log("Removing follower " + follower.name);
+    FollowerTransforms.RemoveAt(0);
     follower.RemoveFromCircle();
-
-    if (!Followers.Remove (follower)) {
-      Debug.Log ("Follower not part of player ?!");
-    }
+    Followers.Remove(follower);
   }
 
   public void ClearFollowers() {
@@ -103,9 +103,7 @@ public class Player : MonoBehaviour {
   }
 
   public void RegroupFollowers() {
-    float radiusX = transform.localScale.x;
-    float radiusY = transform.localScale.y;
-
+    Debug.Log("Followers.Count: " + Followers.Count);
     for (int i = 0; i < Followers.Count; i++) {
       //multiply 'i' by '1.0f' to ensure the result is a fraction
       float pointNum = (i * 1.0f) / Followers.Count;
@@ -113,8 +111,8 @@ public class Player : MonoBehaviour {
       //angle along the unit circle for placing points
       float angle = pointNum * Mathf.PI * 2;
 
-      float x = Mathf.Sin(angle) * radiusX;
-      float y = Mathf.Cos(angle) * radiusY;
+      float x = Mathf.Sin(angle);
+      float y = Mathf.Cos(angle);
 
       FollowerTransforms[i].localPosition = new Vector2(x, y);
     }

@@ -17,11 +17,7 @@ public class Follower : MonoBehaviour {
 
   public void RecreateLineRenderers() {
 
-    foreach (var lineRenderer in LineRenderers.Values) {
-      GameObject.Destroy(lineRenderer.gameObject);
-    }
-
-    LineRenderers.Clear();
+    DestroyLineRenderers();
 
     // create line renderers to all other followers
     var player = GameController.Instance.Player;
@@ -41,6 +37,14 @@ public class Follower : MonoBehaviour {
     });
   }
 
+  private void DestroyLineRenderers() {
+    foreach (var lineRenderer in LineRenderers.Values) {
+      GameObject.Destroy(lineRenderer.gameObject);
+    }
+
+    LineRenderers.Clear();
+  }
+
   private void UpdateLineRenderPositions(Transform followerTransform) {
     if (LineRenderers.ContainsKey(followerTransform)) {
       var lineRenderer = LineRenderers[followerTransform];
@@ -51,6 +55,7 @@ public class Follower : MonoBehaviour {
 
   public void RemoveFromCircle() {
     TransformInCircle = null;
+    DestroyLineRenderers();
 
     // TODO: animation etc.
     GameObject.Destroy(gameObject);
