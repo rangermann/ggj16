@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
@@ -13,6 +14,7 @@ public class LevelGenerator : MonoBehaviour {
   private List<GameObject> currentSections { get; set; }
   private float sectionStart;
   private float sectionEnd;
+  private bool isFirstSection;
 
   public void Awake() {
     currentSections = new List<GameObject>();
@@ -32,6 +34,7 @@ public class LevelGenerator : MonoBehaviour {
     currentSections.Clear();
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
+    isFirstSection = true;
   }
 
   public void Update() {
@@ -42,21 +45,38 @@ public class LevelGenerator : MonoBehaviour {
     float sectionPadding = GameController.Instance.GameConfig.levelGeneratorSectionPadding;
 
     // Only holds true for first call to Update()
-    if (sectionStart > cameraStart) {
+    if (isFirstSection) {
       sectionStart = cameraStart;
       sectionEnd = cameraStart;
     }
 
     while (sectionEnd < cameraEnd + sectionPadding) {
+      GameConfig gameConfig = GameController.Instance.GameConfig;
+
       int nextLevelIdx = Mathf.RoundToInt(Random.value * (sectionPrefabs.Count - 1));
       GameObject nextPrefab = sectionPrefabs[nextLevelIdx];
-      GameObject sectionPrefab = GameObject.Instantiate (nextPrefab);
-      float sectionWidth = GetSectionWidth(sectionPrefab);
+      GameObject section = GameObject.Instantiate (nextPrefab);
+      float sectionWidth = GetSectionWidth(section);
+      section.transform.position = new Vector2(sectionEnd, 0.0f);
+      currentSections.Add (section);
 
-      currentSections.Add (sectionPrefab);
-
-      sectionPrefab.transform.position = new Vector2(sectionEnd, 0.0f);
       sectionEnd += sectionWidth;
+
+      List<GameObject> spawnList = new List<GameObject> ();
+
+      if (!isFirstSection) {
+        for (int i = 0; i < gameConfig.levelGeneratorTrapsPerSection; i++) {
+          spawnList.Add (GameController.Instance.PrefabTrapObstacle);
+        }
+      }
+
+      for (int i = 0; i < gameConfig.levelGeneratorFollowersPerSection; i++) {
+        spawnList.Add (GameController.Instance.PrefabFollowerObstacle);
+      }
+
+
+      SpawnObstaclesInSection (section, spawnList);
+
     }
 
     bool sectionRemoved;
@@ -77,8 +97,11 @@ public class LevelGenerator : MonoBehaviour {
         sectionRemoved = true;
       }
     } while (sectionRemoved);
+
+    isFirstSection = false;
   }
 
+ 
   private void RemoveSection (GameObject section) {
     GameObject.Destroy (section);
     currentSections.Remove (section);
@@ -90,5 +113,33 @@ public class LevelGenerator : MonoBehaviour {
 
     // TODO: cache section width of current section to avoid GetComponent() call every frame
     return sectionWidth;
+  }
+
+  private void SpawnObstaclesInSection(GameObject section, List<GameObject> types) {
+    List<GameObject> spawnLocations = ExtractSpawnLocations (section);
+    spawnLocations.OrderBy(a => Random.value);
+
+    for (int i = 0; i < Mathf.Min (spawnLocations.Count, types.Count); i++) {
+      GameObject obstacle = GameObject.Instantiate(types[i]);
+
+      obstacle.transform.parent = section.transform;
+      obstacle.transform.position = spawnLocations[i].transform.position;
+    }
+  }
+
+  private List<GameObject> ExtractSpawnLocations(GameObject section) {
+    List<GameObject> spawnLocations = new List<GameObject>();
+
+    Transform[] objects = section.GetComponentsInChildren<Transform>();
+
+    foreach(Transform t in objects) {
+      GameObject obj = t.gameObject;
+
+      if (obj.tag == "SpawnPoint") {
+        spawnLocations.Add (obj);
+      }
+    }
+
+    return spawnLocations;
   }
 }
