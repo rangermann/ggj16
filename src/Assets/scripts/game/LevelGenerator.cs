@@ -25,7 +25,6 @@ public class LevelGenerator : MonoBehaviour {
   }
 
   public void CleanUp() {
-    // TODO delete all level elements
     currentSections.ForEach (delegate(GameObject obj) {
       RemoveSection(obj);
     });
