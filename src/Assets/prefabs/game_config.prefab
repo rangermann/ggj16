@@ -40,6 +40,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMovementSpeed: 5
+  playerScaleDownFactor: 0.5
+  playerScaleUpFactor: 0.7
+  playerMinScale: 0.1
+  playerMaxScale: 5
+  playerRadiusVelocityMinFactor: -3
+  playerRadiusVelocityMaxFactor: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
