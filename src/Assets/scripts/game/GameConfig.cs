@@ -14,6 +14,8 @@ public class GameConfig : MonoBehaviour {
   public float playerMaxScale = 5.0f;
   public float playerMinVelocityDelta = -3f;
   public float playerMaxVelocityDelta = 0.4f;
+  public float playerPushVelocityDelta = 10;
+  public Vector3 playerScaleAfterPush = Vector3.one;
   public float playerMaxCameraOffset = 4f;
   public float playerScaleImpact = 1.5f;
   public bool controlByPress = false;
