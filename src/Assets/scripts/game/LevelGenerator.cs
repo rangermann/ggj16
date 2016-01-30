@@ -88,7 +88,10 @@ public class LevelGenerator : MonoBehaviour {
   }
 
   private float GetSectionWidth(GameObject section){
-    // TODO: Return real section width
-    return 2.0f;
+    var boxCollider = section.GetComponent<BoxCollider2D>();
+    float sectionWidth = boxCollider.bounds.size.x;
+
+    // TODO: cache section width of current section to avoid GetComponent() call every frame
+    return sectionWidth;
   }
 }
