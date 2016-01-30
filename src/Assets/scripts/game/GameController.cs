@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private GameConfig gameConfig;
 
+  [SerializeField]
+  private LevelGenerator levelGenerator;
+
   #endregion
 
   private static GameController instance;
@@ -43,6 +46,12 @@ public class GameController : MonoBehaviour {
   public GameConfig GameConfig {
     get {
       return gameConfig;
+    }
+  }
+
+  public LevelGenerator LevelGenerator {
+    get {
+      return levelGenerator;
     }
   }
 
