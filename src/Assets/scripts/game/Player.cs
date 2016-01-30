@@ -47,7 +47,6 @@ public class Player : MonoBehaviour {
       //if (Input.GetMouseButtonDown(0)) {
 		if (Input.GetButtonDown("SimpleButton")) {
 					
-        Debug.Log("One button control");
         if (currentLocalScale > GameConfig.playerMinScale) {
           scaleFactor = -GameConfig.playerScaleDownFactorSP;
           transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
