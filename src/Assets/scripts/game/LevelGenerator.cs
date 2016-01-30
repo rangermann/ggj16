@@ -74,7 +74,6 @@ public class LevelGenerator : MonoBehaviour {
         spawnList.Add (GameController.Instance.PrefabFollowerObstacle);
       }
 
-
       SpawnObstaclesInSection (section, spawnList);
 
     }
@@ -101,7 +100,6 @@ public class LevelGenerator : MonoBehaviour {
     isFirstSection = false;
   }
 
- 
   private void RemoveSection (GameObject section) {
     GameObject.Destroy (section);
     currentSections.Remove (section);

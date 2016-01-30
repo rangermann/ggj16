@@ -65,11 +65,11 @@ public class Player : MonoBehaviour {
     float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
 
-    if (!(GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX() || speedVariation < GameConfig.cameraMovementSpeed)) {
+    if (!(GetCameraX() + GameConfig.playerMaxCameraOffset > GetCurrentX() || speedVariation < GameConfig.cameraMovementSpeed)) {
       speedVariation = 0.0f;
     }
 
-    bool tooFar = GetReferenceX() + GameConfig.playerMaxCameraOffset < GetCurrentX();
+    bool tooFar = GetCameraX() + GameConfig.playerMaxCameraOffset < GetCurrentX();
 
     if (tooFar && speedVariation > 0) {
       speedVariation = 0.0f;
@@ -80,10 +80,8 @@ public class Player : MonoBehaviour {
     rigidBody.velocity = velocity;
   }
 
-  private float GetReferenceX() {
+  private float GetCameraX() {
     Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
-
-    //Debug.Log ("Current cPos: " + cameraPosition.x);
 
     return cameraPosition.x;
   }

@@ -48,7 +48,6 @@ public class GameStatePlaying : AbstractState {
 
   protected override void OnUpdate() {
     MoveCamera ();
-    MoveBackground ();
 
     if (GameConfig.enableWinLoseConditions) {
       var player = GameController.Instance.Player;
@@ -65,13 +64,6 @@ public class GameStatePlaying : AbstractState {
     camPos.x += GameConfig.cameraMovementSpeed * Time.deltaTime;
     TransformLevelCamera.position = camPos;
   }
-
-  private void MoveBackground() {
-    // TODO: implement
-
-
-  }
-
 
   private void SpawnPlayer() {
     GameObject goPlayer = GameObject.Instantiate(GameController.Instance.PrefabPlayer, Vector3.zero, Quaternion.identity) as GameObject;
