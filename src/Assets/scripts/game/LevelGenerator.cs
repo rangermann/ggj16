@@ -39,6 +39,7 @@ public class LevelGenerator : MonoBehaviour {
 
     float cameraStart = cameraPosition.start;
     float cameraEnd = cameraPosition.end; 
+    float sectionPadding = GameController.Instance.GameConfig.levelGeneratorSectionPadding;
 
     // Only holds true for first call to Update()
     if (sectionStart > cameraStart) {
@@ -46,7 +47,7 @@ public class LevelGenerator : MonoBehaviour {
       sectionEnd = cameraStart;
     }
 
-    while (sectionEnd < cameraEnd) {
+    while (sectionEnd < cameraEnd + sectionPadding) {
       int nextLevelIdx = Mathf.RoundToInt(Random.value * (sectionPrefabs.Count - 1));
       GameObject nextPrefab = sectionPrefabs[nextLevelIdx];
       GameObject sectionPrefab = GameObject.Instantiate (nextPrefab);
@@ -69,7 +70,7 @@ public class LevelGenerator : MonoBehaviour {
       GameObject firstSection = currentSections[0];
       float sectionWidth = GetSectionWidth(firstSection);
 
-      if (sectionStart + sectionWidth < cameraStart) {
+      if (sectionStart + sectionWidth < cameraStart - sectionPadding) {
         RemoveSection(firstSection);
 
         sectionStart += sectionWidth;

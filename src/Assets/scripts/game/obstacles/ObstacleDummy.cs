@@ -3,7 +3,7 @@
 public class ObstacleDummy : AbstractObstacle {
 
   protected override void OnPlayerEnter() {
-    Debug.Log("Player entered");
+    Debug.Log("Player entered obstacle");
   }
 
 

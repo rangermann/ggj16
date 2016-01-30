@@ -795,6 +795,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: levelGeneratorSectionPadding
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
   m_IsPrefabParent: 0
