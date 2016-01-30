@@ -46,7 +46,9 @@ public class Player : MonoBehaviour {
     float normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
     float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
-    if (!(GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX() || speedVariation < GameConfig.cameraMovementSpeed)) {
+    bool tooFar = GetCameraX () + GameConfig.playerMaxCameraOffset < GetCurrentX ();
+
+    if (tooFar && speedVariation > 0) {
       speedVariation = 0.0f;
     }
 
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour {
 		rigidBody.velocity = velocity;
 	}
 
-  private float GetReferenceX() {
+  private float GetCameraX() {
     Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
     //Debug.Log ("Current cPos: " + cameraPosition.x);
@@ -86,8 +88,11 @@ public class Player : MonoBehaviour {
 
   public void RemoveFollower(Follower follower) {
     Debug.Log("Removing follower");
-    Followers.Remove(follower);
     follower.RemoveFromCircle();
+
+    if (!Followers.Remove (follower)) {
+      Debug.Log ("Follower not part of player ?!");
+    }
   }
 
   public void ClearFollowers() {

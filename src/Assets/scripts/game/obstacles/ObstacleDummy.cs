@@ -7,7 +7,7 @@ public class ObstacleDummy : AbstractObstacle {
   }
 
 
-  protected override void OnFollowerEnter(){
-    
+  protected override void OnFollowerEnter(GameObject follower){
+    Debug.Log("Follower entered");
   }
 }
