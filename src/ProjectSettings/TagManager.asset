@@ -17,9 +17,9 @@ TagManager:
   - Player
   - DeathZone
   - Obstacle
-  - 
-  - 
-  - 
+  - Background
+  - Foreground
+  - Walls
   - 
   - 
   - 
