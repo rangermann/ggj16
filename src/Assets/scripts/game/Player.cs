@@ -29,18 +29,35 @@ public class Player : MonoBehaviour {
 	}
 
 	public void FixedUpdate (){
+    float speedVariation, normedScale;
+    if (GetReferenceX() + GameConfig.playerMaxCameraOffset > GetCurrentX()) {
+      normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
+      speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
+    } else {
+      speedVariation = 0f;
+    }
 
-		float normedScale = 1 - (GetScale () - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
-		float speedVariation = normedScale * (GameConfig.playerMaxVelocityFactor - GameConfig.playerMinVelocityFactor) + GameConfig.playerMinVelocityFactor;
-		
+
 		Vector2 velocity = rigidBody.velocity;
 		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
 		rigidBody.velocity = velocity;
 	}
 
+  private float GetReferenceX() {
+    Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
+    Debug.Log ("Current cPos: " + cameraPosition.x);
+
+    return cameraPosition.x;
+  }
 
 	private float GetScale(){
 		return transform.localScale.x;
 	}
+
+  private float GetCurrentX() {
+    Debug.Log ("Current x: " + transform.position.x);
+
+    return transform.position.x;
+  }
 }
