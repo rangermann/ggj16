@@ -66,18 +66,31 @@ public class Player : MonoBehaviour
 		float normedScale = 1 - (GetScale () * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
 		float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
+<<<<<<< HEAD
 		if (!(GetReferenceX () + GameConfig.playerMaxCameraOffset > GetCurrentX () || speedVariation < GameConfig.cameraMovementSpeed)) {
 			speedVariation = 0.0f;
 		}
+=======
+    bool tooFar = GetCameraX () + GameConfig.playerMaxCameraOffset < GetCurrentX ();
+
+    if (tooFar && speedVariation > 0) {
+      speedVariation = 0.0f;
+    }
+>>>>>>> a4546bf7f70bc8097dfea38a1630d3fe5e3ac374
 
 		Vector2 velocity = rigidBody.velocity;
 		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
 		rigidBody.velocity = velocity;
 	}
 
+<<<<<<< HEAD
 	private float GetReferenceX ()
 	{
 		Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
+=======
+  private float GetCameraX() {
+    Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
+>>>>>>> a4546bf7f70bc8097dfea38a1630d3fe5e3ac374
 
 		//Debug.Log ("Current cPos: " + cameraPosition.x);
 
@@ -108,12 +121,23 @@ public class Player : MonoBehaviour
 		follower.AttachToCircle (goFollowerTransform.transform);
 	}
 
+<<<<<<< HEAD
 	public void RemoveFollower (Follower follower)
 	{
 		Debug.Log ("Removing follower");
 		Followers.Remove (follower);
 		follower.RemoveFromCircle ();
 	}
+=======
+  public void RemoveFollower(Follower follower) {
+    Debug.Log("Removing follower");
+    follower.RemoveFromCircle();
+
+    if (!Followers.Remove (follower)) {
+      Debug.Log ("Follower not part of player ?!");
+    }
+  }
+>>>>>>> a4546bf7f70bc8097dfea38a1630d3fe5e3ac374
 
 	public void ClearFollowers ()
 	{

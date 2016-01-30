@@ -64,6 +64,8 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public Player Player { get; set; }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(transform.parent.gameObject);
