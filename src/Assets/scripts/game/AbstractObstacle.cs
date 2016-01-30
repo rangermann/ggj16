@@ -9,6 +9,9 @@ public abstract class AbstractObstacle : MonoBehaviour {
   private bool destroyOnPlayerEnter = true;
 
   [SerializeField]
+  private bool destroyOnFollowerEnter = true;
+
+  [SerializeField]
   private float destroyDelaySeconds = 0;
 
   [SerializeField]
@@ -18,7 +21,11 @@ public abstract class AbstractObstacle : MonoBehaviour {
 
   public void OnTriggerEnter2D(Collider2D other) {
     if (other.tag == "Player") {
-      HandlePlayerEnter();
+      HandlePlayerEnter ();
+    } else if (other.tag == "Follower") {
+      HandleFollowerEnter (other.gameObject);
+    } else {
+      Debug.Log ("Collission with object tagged " + other.tag);
     }
   }
 
@@ -34,5 +41,15 @@ public abstract class AbstractObstacle : MonoBehaviour {
     }
   }
 
+  private void HandleFollowerEnter(GameObject follower){
+    OnFollowerEnter(follower);
+
+    if (destroyOnFollowerEnter) {
+      GameObject.Destroy(gameObject, destroyDelaySeconds);
+    }
+  }
+
   protected abstract void OnPlayerEnter();
+
+  protected abstract void OnFollowerEnter(GameObject follower);
 }
