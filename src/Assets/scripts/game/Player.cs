@@ -146,4 +146,11 @@ public class Player : MonoBehaviour {
       follower.MoveToPosition();
     });
   }
+
+  public void PushForward() {
+    transform.localScale = GameConfig.playerScaleAfterPush;
+    Vector2 velocity = rigidBody.velocity;
+    velocity.x = GameConfig.cameraMovementSpeed + GameConfig.playerPushVelocityDelta;
+    rigidBody.velocity = velocity;
+  }
 }
