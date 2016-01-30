@@ -49,8 +49,10 @@ MonoBehaviour:
   playerMaxCameraOffset: 4
   playerScaleImpact: 1.5
   controlByPress: 1
+  enableWinLoseConditions: 1
   followersMin: 3
   followersToWin: 10
+  followersMovementSpeed: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -11,10 +11,11 @@ public class FollowerObstacle : AbstractObstacle {
   }
 
 
-  private void AddPlayer(){
+  private void AddPlayer() {
     Player player = GameController.Instance.Player;
 
     GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
+    goFollower.transform.position = transform.position;
     Follower follower = goFollower.GetComponent<Follower>();
     player.AddFollower (follower);
     player.RegroupFollowers ();

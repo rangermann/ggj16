@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Follower : MonoBehaviour {
@@ -11,9 +12,32 @@ public class Follower : MonoBehaviour {
     LineRenderers = new Dictionary<Transform, LineRenderer>();
   }
 
-  public void AttachToCircle(Transform transformInCircle) {
+  public void AttachToCircle(Transform transformInCircle, bool snap) {
     TransformInCircle = transformInCircle;
+    if (snap) {
+      transform.position = TransformInCircle.position;
+    }
   }
+
+  //private IEnumerator MoveIntoCircle(Transform transformInCircle) {
+  //  var gameConfig = GameController.Instance.GameConfig;
+  //  var startPosition = transform.position;
+  //  var distance = Vector3.Distance(startPosition, transformInCircle.position);
+  //  var duration = distance / gameConfig.followersMovementSpeed;
+  //  float timeTaken = 0;
+  //  while (timeTaken < duration) {
+
+  //    var currentPosition = Vector3.Lerp(startPosition, transformInCircle.position, gameConfig.followersMovementCurve.Evaluate(timeTaken / duration));
+  //    transform.position = currentPosition;
+
+  //    UpdateLineRenderers();
+
+  //    timeTaken += Time.deltaTime;
+  //    yield return null;
+  //  }
+
+  //  TransformInCircle = transformInCircle;
+  //}
 
   public void RecreateLineRenderers() {
 
@@ -22,9 +46,11 @@ public class Follower : MonoBehaviour {
     // create line renderers to all other followers
     var player = GameController.Instance.Player;
     var prefab = GameController.Instance.PrefabFollowerLineRenderer;
-    player.FollowerTransforms.ForEach(followerTransform => {
+    player.Followers.ForEach(follower => {
 
-      if (followerTransform != TransformInCircle) {
+      var followerTransform = follower.transform;
+
+      if (follower.TransformInCircle != TransformInCircle) {
 
         GameObject goLineRenderer = GameObject.Instantiate(prefab);
         goLineRenderer.transform.SetParent(transform);
@@ -63,12 +89,15 @@ public class Follower : MonoBehaviour {
 
   public void Update() {
     if (TransformInCircle != null) {
-      transform.position = TransformInCircle.position;
-
-      var player = GameController.Instance.Player;
-      player.FollowerTransforms.ForEach(followerTransform => {
-        UpdateLineRenderPositions(followerTransform);
-      });
+      transform.position = Vector3.Lerp(transform.position, TransformInCircle.position, GameController.Instance.GameConfig.followersMovementSpeed * Time.deltaTime);
+      UpdateLineRenderers();
     }
+  }
+
+  private void UpdateLineRenderers() {
+    var player = GameController.Instance.Player;
+    player.Followers.ForEach(follower => {
+      UpdateLineRenderPositions(follower.transform);
+    });
   }
 }

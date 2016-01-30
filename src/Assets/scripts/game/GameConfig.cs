@@ -14,10 +14,13 @@ public class GameConfig : MonoBehaviour {
   public float playerMaxVelocityDelta = 0.4f;
   public float playerMaxCameraOffset = 4f;
   public float playerScaleImpact = 1.5f;
-  public bool controlByPress = false; 
+  public bool controlByPress = false;
 
   [Header("Followers")]
+  public bool enableWinLoseConditions = true;
   public int followersMin = 3;
   public int followersToWin = 10;
+  public float followersMovementSpeed = 2;
+  
 }
 
