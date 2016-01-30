@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 		float currentLocalScale = GetScale();
-		bool scaleUp = Input.GetMouseButton (0);
+		bool scaleUp = !Input.GetMouseButton (0);
 
 		float scaleFactor = 0;
 	
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 	public void FixedUpdate (){
 
 		float normedScale = 1 - (GetScale () - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
-		float speedVariation = normedScale * (GameConfig.playerRadiusVelocityMaxFactor - GameConfig.playerRadiusVelocityMinFactor) + GameConfig.playerRadiusVelocityMinFactor;
+		float speedVariation = normedScale * (GameConfig.playerMaxVelocityFactor - GameConfig.playerMinVelocityFactor) + GameConfig.playerMinVelocityFactor;
 		
 		Vector2 velocity = rigidBody.velocity;
 		velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
