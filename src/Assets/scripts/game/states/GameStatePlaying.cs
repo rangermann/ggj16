@@ -10,8 +10,6 @@ public class GameStatePlaying : AbstractState {
 
   private GameConfig GameConfig { get; set; }
 
-  private Player Player { get; set; }
-
   public GameStatePlaying(string stateName)
     : base(stateName) {
   }
@@ -38,8 +36,9 @@ public class GameStatePlaying : AbstractState {
 
   protected override void OnLeave() {
     // kill the player
-    Player.ClearFollowers();
-    GameObject.Destroy(Player.gameObject);
+    var player = GameController.Instance.Player;
+    player.ClearFollowers();
+    GameObject.Destroy(player.gameObject);
   }
 
   protected override void OnUpdate() {
@@ -61,14 +60,16 @@ public class GameStatePlaying : AbstractState {
 
   private void SpawnPlayer() {
     GameObject goPlayer = GameObject.Instantiate(GameController.Instance.PrefabPlayer, Vector3.zero, Quaternion.identity) as GameObject;
-    Player = goPlayer.GetComponent<Player>();
+    var player = goPlayer.GetComponent<Player>();
+
+    GameController.Instance.Player = player;
 
     // add initial followers
     for (int i = 0; i < GameConfig.followersMin; i++) {
       GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
       Follower follower = goFollower.GetComponent<Follower>();
-      Player.AddFollower(follower);
+      player.AddFollower(follower);
     }
-    Player.RegroupFollowers();
+    player.RegroupFollowers();
   }
 }

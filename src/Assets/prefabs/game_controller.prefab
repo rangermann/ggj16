@@ -44,6 +44,8 @@ MonoBehaviour:
   transformLevelCamera: {fileID: 0}
   gameConfig: {fileID: 0}
   levelGenerator: {fileID: 0}
+  prefabFollowerLineRenderer: {fileID: 143188, guid: bef994ee4d4c2264ca266a05d3f55d33,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

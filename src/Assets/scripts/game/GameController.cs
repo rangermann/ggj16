@@ -23,6 +23,9 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private LevelGenerator levelGenerator;
 
+  [SerializeField]
+  private GameObject prefabFollowerLineRenderer;
+
   #endregion
 
   private static GameController instance;
@@ -61,6 +64,17 @@ public class GameController : MonoBehaviour {
   public LevelGenerator LevelGenerator {
     get {
       return levelGenerator;
+    }
+  }
+
+  public Player Player {
+    get;
+    set;
+  }
+
+  public GameObject PrefabFollowerLineRenderer {
+    get {
+      return prefabFollowerLineRenderer;
     }
   }
 
