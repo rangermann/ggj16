@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private GameObject prefabFollowerLineRenderer;
 
+  [SerializeField]
+  private Background background;
+
   #endregion
 
   private static GameController instance;
@@ -78,6 +81,12 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public Background Background {
+    get {
+      return background;
+    }
+  }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(transform.parent.gameObject);
@@ -103,6 +112,13 @@ public class GameController : MonoBehaviour {
   }
 
 
+  public CameraBounds GetCameraXBounds() {
+    Camera mainCamera = Camera.main;
+    Vector3 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
+    float xDist = mainCamera.aspect * mainCamera.orthographicSize;
+
+    return new CameraBounds (cameraPosition.x - xDist, cameraPosition.x + xDist);
+  }
 }
 

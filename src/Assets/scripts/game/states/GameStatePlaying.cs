@@ -32,6 +32,9 @@ public class GameStatePlaying : AbstractState {
     int seed = 234234; // TODO: use seed from onEnterParams
     GameController.Instance.LevelGenerator.CleanUp();
     GameController.Instance.LevelGenerator.StartGenerating(seed);
+
+    GameController.Instance.Background.Reset ();
+    GameController.Instance.Background.Start ();
   }
 
   protected override void OnLeave() {
@@ -39,10 +42,13 @@ public class GameStatePlaying : AbstractState {
     var player = GameController.Instance.Player;
     player.ClearFollowers();
     GameObject.Destroy(player.gameObject);
+
+    GameController.Instance.Background.Stop ();
   }
 
   protected override void OnUpdate() {
-    MoveCamera();
+    MoveCamera ();
+    MoveBackground ();
 
     if (GameConfig.enableWinLoseConditions) {
       var player = GameController.Instance.Player;
@@ -58,6 +64,12 @@ public class GameStatePlaying : AbstractState {
     Vector3 camPos = TransformLevelCamera.position;
     camPos.x += GameConfig.cameraMovementSpeed * Time.deltaTime;
     TransformLevelCamera.position = camPos;
+  }
+
+  private void MoveBackground() {
+    // TODO: implement
+
+
   }
 
 

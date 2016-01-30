@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
 public class GameConfig : MonoBehaviour {
-
   [Header("Camera")]
   public float cameraMovementSpeed = 5.0f;
 
   [Header("Player")]
-  public float playerScaleDownFactor = 0.5f; //0.5f for pressing control; else 8 
-  public float playerScaleUpFactor = 0.7f; //0.7f for pressing control; else 0..3f 
+  public float playerScaleDownFactor = 0.5f; //0.5f for pressing control; else 8
+  public float playerScaleUpFactor = 0.7f; //0.7f for pressing control; else 0..3f
   public float playerScaleDownFactorSP = 8f; //for the single pressing opt
-  public float playerScaleUpFactorSP = 0.4f; //for the single pressing opt 
+  public float playerScaleUpFactorSP = 0.4f; //for the single pressing opt
+
   public float playerMinScale = 0.5f;
   public float playerMaxScale = 5.0f;
   public float playerMinVelocityDelta = -3f;
@@ -23,6 +23,10 @@ public class GameConfig : MonoBehaviour {
   public int followersMin = 3;
   public int followersToWin = 10;
   public float followersMovementSpeed = 2;
-  
+
+  [Header("Background")]
+  public float backgroundWidth = 29.0f;
+  public float backgroundScrollSpeed = 0.5f;
+
 }
 
