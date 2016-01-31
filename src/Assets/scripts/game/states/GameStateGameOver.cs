@@ -23,9 +23,9 @@ public class GameStateGameOver : AbstractState {
   }
 
   protected override void OnGUICustom() {
-    GUILayout.Label("Game over");
-    if (GUILayout.Button("Restart")) {
-      GameController.Instance.ChangeState("GameStatePlaying");
-    }
+    //GUILayout.Label("Game over");
+    //if (GUILayout.Button("Restart")) {
+    //  GameController.Instance.ChangeState("GameStatePlaying");
+    //}
   }
 }

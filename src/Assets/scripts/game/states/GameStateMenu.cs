@@ -28,6 +28,7 @@ public class GameStateMenu : AbstractState {
 	AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
 
 		AudioClip clip = GameConfig.title_loop;
+    audio.loop = true;
 		audio.Stop();
 		audio.clip = clip;
 		audio.Play();
