@@ -17,7 +17,7 @@ public class CloudsAnim : MonoBehaviour {
 	void Start () {
     time = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
     if (!initialized) {
@@ -26,7 +26,7 @@ public class CloudsAnim : MonoBehaviour {
     }
 
     transform.localPosition = new Vector2(startPos.x + distX * Mathf.Sin(time * speedX), startPos.y + distY * Mathf.Sin(time * speedY));
-	  
+
     time += Time.deltaTime;
   }
 }

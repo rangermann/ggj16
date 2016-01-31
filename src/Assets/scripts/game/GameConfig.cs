@@ -30,9 +30,14 @@ public class GameConfig : MonoBehaviour {
   public float playerHellFollowerInitialDelay = 4;
   public float playerHellFollowerDelay = 1;
   public float playerHellPortalInitialDelay = 4;
+  
   public float playerHellPortalScaleDelay = 5;
   public float playerHellScaleUpSpeed = 1.0f;
   public float playerHellScaleUpDuration = 3;
+  [Header("Priests")]
+  public float priestMovementDuration = 1.0f;
+  public float priestConversionPlayerSize = 0.6f;
+  public float priestScaleIncreasePerFollower = 0.1f;
 
   [Header("Background")]
   public float backgroundWidth = 29.0f;
@@ -43,6 +48,7 @@ public class GameConfig : MonoBehaviour {
   public int levelGeneratorTrapsPerSection = 2;
   public int levelGeneratorFollowersPerSection = 4;
   
+  public int levelGeneratorPriestsPerSection = 2;
 
 }
 

@@ -10,8 +10,14 @@ public class DeathZone : MonoBehaviour {
       GameController.Instance.Player.RegroupFollowers();
 
       // push the player to max velocity
-      GameController.Instance.Player.PushForward();
-    } else {
+      Player player = GameController.Instance.Player;
+      player.PushForward();
+      player.DidCollideWithDeathZone ();
+
+      
+     } else if (other.tag == "Priest") {
+      Debug.Log ("Removing Priest");
+        GameObject.Destroy (other.gameObject);
       // TODO: destroy other objects if needed
     }
   }

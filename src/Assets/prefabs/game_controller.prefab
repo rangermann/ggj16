@@ -49,6 +49,8 @@ MonoBehaviour:
   levelGenerator: {fileID: 0}
   prefabFollowerLineRenderer: {fileID: 143188, guid: bef994ee4d4c2264ca266a05d3f55d33,
     type: 2}
+  prefabPriestObstacle: {fileID: 189818, guid: 2ce1b6ba1eb9d4593abedb1fabc7fa40, type: 2}
+  prefabExplosion1: {fileID: 159168, guid: c49676a3f74274f3d937f6aeb27473d0, type: 2}
   background: {fileID: 0}
   startScreen: {fileID: 106080, guid: b9ca300e913cb4980824b17d4589eb6c, type: 2}
   endScreen: {fileID: 106080, guid: b9ca300e913cb4980824b17d4589eb6c, type: 2}
@@ -59,7 +61,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: prefabPriestObstacle
+      value: 
+      objectReference: {fileID: 189818, guid: 2ce1b6ba1eb9d4593abedb1fabc7fa40, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103234}

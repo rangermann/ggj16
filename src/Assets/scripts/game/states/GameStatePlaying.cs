@@ -35,10 +35,16 @@ public class GameStatePlaying : AbstractState {
 
     GameController.Instance.Background.Reset ();
     GameController.Instance.Background.Start ();
+
+	GameController.Instance.RoundStartTime = Time.time;
+	GameController.Instance.CurrentlyPlaying = true;
+
   }
 
   protected override void OnLeave() {
     GameController.Instance.Background.Stop ();
+	GameController.Instance.CurrentlyPlaying = false;
+
     GameController.Instance.Player.IsMoving = false;
   }
 

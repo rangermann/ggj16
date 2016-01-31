@@ -25,7 +25,7 @@ public abstract class AbstractObstacle : MonoBehaviour {
     } else if (other.tag == "Follower") {
       HandleFollowerEnter (other.gameObject);
     } else {
-      Debug.Log ("Collission with object tagged " + other.tag);
+      Debug.Log ("Collision with object tagged " + other.tag);
     }
   }
 

@@ -33,6 +33,12 @@ public class GameController : MonoBehaviour {
   private GameObject prefabFollowerLineRenderer;
 
   [SerializeField]
+  private GameObject prefabPriestObstacle;
+
+  [SerializeField]
+  private GameObject prefabExplosion1;
+
+  [SerializeField]
   private Background background;
 
   [SerializeField]
@@ -41,12 +47,14 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private GameObject endScreen;
 
+
   [SerializeField]
   private GameObject prefabHellEffect;
 
   #endregion
 
   private static GameController instance;
+
   public static GameController Instance {
     get {
       return instance;
@@ -54,6 +62,12 @@ public class GameController : MonoBehaviour {
   }
 
   private StateMachine StateMachine { get; set; }
+
+
+  public float RoundStartTime { get; set; }
+
+  public bool CurrentlyPlaying { get; set; }
+
 
   public GameObject PrefabPlayer {
     get {
@@ -108,23 +122,36 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public GameObject PrefabPriestObstacle {
+    get {
+      return prefabPriestObstacle;
+    }
+  }
+
+  public GameObject PrefabExplosion1 {
+    get {
+      return prefabExplosion1;
+    }
+  }
+
   public Background Background {
     get {
       return background;
     }
   }
 
-	public GameObject StartScreen {
-		get {
-			return startScreen;
-		}
-	}
+  public GameObject StartScreen {
+    get {
+      return startScreen;
+    }
+  }
 
-	public GameObject EndScreen {
-		get {
-			return endScreen;
-		}
-	}
+  public GameObject EndScreen {
+    get {
+      return endScreen;
+    }
+  }
+
 
   public GameObject PrefabHellEffect {
     get {
@@ -163,7 +190,7 @@ public class GameController : MonoBehaviour {
 
     float xDist = mainCamera.aspect * mainCamera.orthographicSize;
 
-    return new CameraBounds (cameraPosition.x - xDist, cameraPosition.x + xDist);
+    return new CameraBounds(cameraPosition.x - xDist, cameraPosition.x + xDist);
   }
 
 
