@@ -2,8 +2,8 @@
 
 public class GameStateGameOver : AbstractState {
 
-  public GameStateGameOver(string stateName)
-    : base(stateName) {
+  public GameStateGameOver(string stateName, AbstractPanelDeclaration panel)
+    : base(stateName, panel) {
   }
 
   protected override void OnInitialize() {

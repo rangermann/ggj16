@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour {
     List<AbstractState> states = new List<AbstractState>();
     states.Add(new GameStateMenu("GameStateMenu", FindPanel<PanelStart>()));
     states.Add(new GameStatePlaying("GameStatePlaying"));
-    states.Add(new GameStateGameOver("GameStateGameOver"));
+    states.Add(new GameStateGameOver("GameStateGameOver", FindPanel<PanelGameOver>()));
     states.Add(new GameStateLevelFinished("GameStateLevelFinished"));
     // add more game states here
 
@@ -200,9 +200,17 @@ public class GameController : MonoBehaviour {
   }
 
   public void KillPlayer() {
-    Player.ClearFollowers();
-    GameObject.Destroy(Player.gameObject);
-    Player = null;
+    if (Player != null) {
+      Player.ClearFollowers();
+      GameObject.Destroy(Player.gameObject);
+      Player = null;
+    }
+  }
+
+  public void ResetCamera() {
+    Vector3 camPos = TransformLevelCamera.position;
+    camPos.x = 0;
+    TransformLevelCamera.position = camPos;
   }
 }
 

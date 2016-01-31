@@ -50,5 +50,8 @@ public class GameConfig : MonoBehaviour {
   
   public int levelGeneratorPriestsPerSection = 2;
 
+   [Header("Game Over")]
+  public float gameOverDuration = 3;
+
 }
 
