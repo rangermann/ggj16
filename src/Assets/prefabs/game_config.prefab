@@ -50,7 +50,7 @@ MonoBehaviour:
   playerMaxVelocityDelta: 2
   playerPushVelocityDelta: 10
   playerScaleAfterPush: {x: 1, y: 1, z: 1}
-  playerMaxCameraOffset: 4
+  playerMaxCameraOffset: 2
   playerScaleImpact: 1.5
   controlByPress: 0
   playerHellEffectSpinCurve:
@@ -101,6 +101,7 @@ MonoBehaviour:
   metal_loop: {fileID: 8300000, guid: c50586a78dae44b3c9e611025022c8fe, type: 3}
   title_loop: {fileID: 8300000, guid: 958a8b94f471548918c4ea2830740ffd, type: 3}
   win_loop: {fileID: 8300000, guid: 5c85e798c1cbb43fd817d0777055b612, type: 3}
+  gameOverDuration: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

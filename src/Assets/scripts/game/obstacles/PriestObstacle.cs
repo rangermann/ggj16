@@ -83,7 +83,7 @@ public class PriestObstacle : AbstractObstacle {
   public void DestroyPriest(){
     isDestroyed = true;
 
-    GameObject goExplosion = GameObject.Instantiate (GameController.Instance.PrefabExplosion1);
+    GameObject goExplosion = GameObject.Instantiate (GameController.Instance.PrefabPriestExplosion);
     goExplosion.transform.position = transform.position;
 
     GameObject.Destroy (transform.gameObject);
