@@ -58,9 +58,7 @@ public class GameStatePlaying : AbstractState {
 
     // reset camera
     TransformLevelCamera = GameController.Instance.TransformLevelCamera;
-    Vector3 camPos = TransformLevelCamera.position;
-    camPos.x = 0;
-    TransformLevelCamera.position = camPos;
+    GameController.Instance.ResetCamera();
 
     // spawn player
     SpawnPlayer();

@@ -6,13 +6,11 @@ public class Background : MonoBehaviour {
   private float scrollSpeed;
   private bool moving;
 
-  public void Awake() {
+	public void Start () {
     GameConfig gameConfig = GameController.Instance.GameConfig;
     width = gameConfig.backgroundWidth;
     scrollSpeed = gameConfig.backgroundScrollSpeed;
-  }
 
-	public void Start () {
     moving = true;
 	}
 

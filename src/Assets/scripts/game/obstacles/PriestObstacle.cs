@@ -5,11 +5,18 @@ using System.Collections.Generic;
 public class PriestObstacle : AbstractObstacle {
   public bool IsMoving { get; private set; }
   private bool isDestroyed;
-  public Transform attachedTo;
+  public bool attached;
+
+  private GameObject wobble;
 
   public void Awake(){
     IsMoving = false;
     isDestroyed = false;
+    attached = false;
+
+    // very dirty!
+    wobble = transform.GetChild (1).gameObject;
+    wobble.SetActive (false);
   }
 
   protected override void OnPlayerEnter() {
@@ -32,12 +39,12 @@ public class PriestObstacle : AbstractObstacle {
 
 
   private IEnumerator MoveToPlayerCenter(Transform transformInPlayer){
-    attachedTo = null;
     while (IsMoving) {
       yield return null;
     }
     IsMoving = true;
-    
+    wobble.SetActive (true);
+
     float duration = 2.0f;
     float timeTaken = 0.0f;
 
@@ -46,6 +53,8 @@ public class PriestObstacle : AbstractObstacle {
     Player player = GameController.Instance.Player;
 
     player.AddPriest (this);
+    attached = true;
+    
     while (timeTaken < duration && !isDestroyed) {
       var currentPosition = Vector3.Lerp(startPosition, transformInPlayer.position, (timeTaken / duration));
       transform.position = currentPosition;
@@ -64,13 +73,10 @@ public class PriestObstacle : AbstractObstacle {
   }
   
   public void Update(){
-    if (attachedTo != null) {
-      transform.position = attachedTo.position;
-    }
   }
 
   public void DetachFromPlayer(){
-    attachedTo = null;
+    wobble.SetActive (false);
   }
     
 

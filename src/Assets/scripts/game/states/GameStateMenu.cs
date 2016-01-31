@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ public class GameStateMenu : AbstractState {
   }
 
   protected override void OnEnter(object onEnterParams = null) {
+    GameController.Instance.ResetCamera();
     GameController.Instance.Background.Reset();
 
 	AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
@@ -34,17 +36,26 @@ public class GameStateMenu : AbstractState {
     //GameController.Instance.Background.Start();
 
     // create fake player
+    GameController.Instance.StartCoroutine(CreateFakePlayer());
+  }
+
+  private IEnumerator CreateFakePlayer() {
+    yield return new WaitForSeconds(0.2f); // TODO magic number
+
     GameObject goPlayer = GameObject.Instantiate(GameController.Instance.PrefabPlayer, Vector3.zero, Quaternion.identity) as GameObject;
     FakePlayer = goPlayer.GetComponent<Player>();
     FakePlayer.IsMoving = false;
     GameController.Instance.Player = FakePlayer;
-    
+
     // add initial followers
     for (int i = 0; i < 7; i++) { // TODO: magic number
       GameObject goFollower = GameObject.Instantiate(GameController.Instance.PrefabFollower) as GameObject;
       Follower follower = goFollower.GetComponent<Follower>();
       FakePlayer.AddFollower(follower, true);
     }
+    
+    yield return new WaitForSeconds(1f); // TODO magic number
+
     FakePlayer.RegroupFollowers();
 
     // position fake player
