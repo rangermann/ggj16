@@ -20,9 +20,12 @@ public class SetText : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isTimer && GameController.Instance.CurrentlyPlaying) {
-			string currentText = (GameController.Instance.Player.Followers.Count).ToString ();
-			currentText = currentText + " / 10";
-			txt.text = currentText;
+      string currentText = string.Empty;
+      if (GameController.Instance.Player != null) {
+        currentText = (GameController.Instance.Player.Followers.Count).ToString();
+        currentText = currentText + " / " + GameController.Instance.GameConfig.followersToWin;
+      }
+      txt.text = currentText;
 		} else {
 			if(	GameController.Instance.CurrentlyPlaying) {
 			startTime = GameController.Instance.RoundStartTime;

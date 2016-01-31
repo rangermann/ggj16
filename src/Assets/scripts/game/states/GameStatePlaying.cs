@@ -21,9 +21,7 @@ public class GameStatePlaying : AbstractState {
   protected override void OnEnter(object onEnterParams = null) {
     // reset camera
     TransformLevelCamera = GameController.Instance.TransformLevelCamera;
-    Vector3 camPos = TransformLevelCamera.position;
-    camPos.x = 0;
-    TransformLevelCamera.position = camPos;
+    GameController.Instance.ResetCamera();
 
     // spawn player
     SpawnPlayer();
