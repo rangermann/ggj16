@@ -104,7 +104,15 @@ public class Player : MonoBehaviour {
     if (GetScale () < gameConfig.priestConversionPlayerSize) {
       Debug.Log ("Minimum scale achieved - Adding priests as followers");
 
+      List<PriestObstacle> priestsToRemove = new List<PriestObstacle>();
+      
       Priests.ForEach (priest => {
+        if (!priest.IsMoving){
+          priestsToRemove.Add(priest);
+        }
+      });
+
+      priestsToRemove.ForEach(priest => {
         GameObject goFollower = GameObject.Instantiate (GameController.Instance.PrefabFollower);
         Follower follower = goFollower.GetComponent<Follower> () as Follower;
 
@@ -113,11 +121,11 @@ public class Player : MonoBehaviour {
         AddFollower (follower, false);
         RegroupFollowers ();
 
+        RemovePriest(priest);
         priest.DestroyPriest ();
       });
+      priestsToRemove.Clear ();
 
-      Priests.Clear ();
-      PriestsToMove.Clear ();
     } else {
       PriestsToMove.ForEach (priest => {
         priest.transform.position = transform.position;
@@ -128,6 +136,7 @@ public class Player : MonoBehaviour {
       if (Priests.Count > 0) {
         PriestObstacle priest = Priests [0];
         RemovePriest (priest);
+        priest.DetachFromPlayer ();
       }
     }
 
@@ -140,8 +149,16 @@ public class Player : MonoBehaviour {
     if (PriestsToMove.Contains (priest)) {
       PriestsToMove.Remove (priest);
     }
+  }
 
-    priest.DetachFromPlayer ();
+  public void DestroyAllPriests() {
+    Priests.ForEach (priest => {
+      priest.DestroyPriest();
+    });
+
+    Priests.Clear ();
+    PriestsToMove.Clear ();
+
   }
 
   public void IncreaseScaleBy(float scaleFactor) {
