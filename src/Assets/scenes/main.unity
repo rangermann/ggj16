@@ -482,21 +482,21 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: transformLevelCamera
+      propertyPath: background
       value: 
-      objectReference: {fileID: 248699608}
-    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: gameConfig
-      value: 
-      objectReference: {fileID: 1620575934}
+      objectReference: {fileID: 347728155}
     - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
       propertyPath: levelGenerator
       value: 
       objectReference: {fileID: 2035543665}
     - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: background
+      propertyPath: gameConfig
       value: 
-      objectReference: {fileID: 347728155}
+      objectReference: {fileID: 1620575934}
+    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
+      propertyPath: transformLevelCamera
+      value: 
+      objectReference: {fileID: 248699608}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
   m_IsPrefabParent: 0
