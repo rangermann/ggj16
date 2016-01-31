@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelaySeconds: 0
-  prefabDestroyEffect: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
+  prefabDestroyEffect: {fileID: 159168, guid: c49676a3f74274f3d937f6aeb27473d0, type: 2}
 --- !u!212 &21256436
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -159,7 +159,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: prefabDestroyEffect
       value: 
-      objectReference: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
+      objectReference: {fileID: 159168, guid: c49676a3f74274f3d937f6aeb27473d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135694}

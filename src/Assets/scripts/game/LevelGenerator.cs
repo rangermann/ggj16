@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour {
   }
 
   public void StartGenerating(int seed) {
-    // Random.seed = seed;
+    Random.seed = seed;
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
   }
@@ -34,8 +34,7 @@ public class LevelGenerator : MonoBehaviour {
     currentSections.Clear();
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
-    // isFirstSection = true;
-    isFirstSection = false;
+    isFirstSection = true;
   }
 
   public void Update() {

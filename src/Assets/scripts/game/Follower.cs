@@ -113,6 +113,7 @@ public class Follower : MonoBehaviour {
   }
   
   public void RemoveFromCircle() {
+    Debug.Log("Removing follower from circle");
     TransformInCircle = null;
     DestroyLineRenderers();
 

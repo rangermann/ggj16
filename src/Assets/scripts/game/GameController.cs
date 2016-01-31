@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
 
   [SerializeField]
   private GameObject prefabFollowerLineRenderer;
-  
+
   [SerializeField]
   private GameObject prefabPriestObstacle;
 
@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour {
       return prefabTrapObstacle;
     }
   }
-  
+
   public GameObject PrefabPriestObstacle {
     get {
       return prefabPriestObstacle;
@@ -140,17 +140,17 @@ public class GameController : MonoBehaviour {
     }
   }
 
-	public GameObject StartScreen {
-		get {
-			return startScreen;
-		}
-	}
+  public GameObject StartScreen {
+    get {
+      return startScreen;
+    }
+  }
 
-	public GameObject EndScreen {
-		get {
-			return endScreen;
-		}
-	}
+  public GameObject EndScreen {
+    get {
+      return endScreen;
+    }
+  }
 
 
   public GameObject PrefabHellEffect {
@@ -164,13 +164,13 @@ public class GameController : MonoBehaviour {
     DontDestroyOnLoad(transform.parent.gameObject);
 
     List<AbstractState> states = new List<AbstractState>();
-    states.Add(new GameStateLoading("GameStateLoading"));
+    states.Add(new GameStateMenu("GameStateMenu", FindPanel<PanelStart>()));
     states.Add(new GameStatePlaying("GameStatePlaying"));
     states.Add(new GameStateGameOver("GameStateGameOver"));
     states.Add(new GameStateLevelFinished("GameStateLevelFinished"));
     // add more game states here
 
-	StateMachine = StateMachine.Create("state_machine", states, "GameStateLoading");
+    StateMachine = StateMachine.Create("state_machine", states, "GameStateMenu");
   }
 
   public void ChangeState(string stateName, object onEnterParams = null) {
@@ -190,7 +190,19 @@ public class GameController : MonoBehaviour {
 
     float xDist = mainCamera.aspect * mainCamera.orthographicSize;
 
-    return new CameraBounds (cameraPosition.x - xDist, cameraPosition.x + xDist);
+    return new CameraBounds(cameraPosition.x - xDist, cameraPosition.x + xDist);
+  }
+
+
+  private PanelType FindPanel<PanelType>() where PanelType : AbstractPanelDeclaration {
+    // HACK
+    return GameObject.FindObjectOfType<PanelType>();
+  }
+
+  public void KillPlayer() {
+    Player.ClearFollowers();
+    GameObject.Destroy(Player.gameObject);
+    Player = null;
   }
 }
 

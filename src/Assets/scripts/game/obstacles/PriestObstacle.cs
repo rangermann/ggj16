@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PriestObstacle : AbstractObstacle {
-  private bool isMoving;
+  public bool IsMoving { get; private set; }
   private bool isDestroyed;
   public Transform attachedTo;
 
   public void Awake(){
-    isMoving = false;
+    IsMoving = false;
     isDestroyed = false;
   }
 
   protected override void OnPlayerEnter() {
     Debug.Log("Priest entered player");
     
-    if (isMoving) {
+    if (IsMoving) {
       // ignore this hit!
       return;
     }
@@ -33,10 +33,10 @@ public class PriestObstacle : AbstractObstacle {
 
   private IEnumerator MoveToPlayerCenter(Transform transformInPlayer){
     attachedTo = null;
-    while (isMoving) {
+    while (IsMoving) {
       yield return null;
     }
-    isMoving = true;
+    IsMoving = true;
     
     float duration = 2.0f;
     float timeTaken = 0.0f;
@@ -60,7 +60,7 @@ public class PriestObstacle : AbstractObstacle {
       Debug.Log ("Will not add destroyed Priest");
     }
 
-    isMoving = false;
+    IsMoving = false;
   }
   
   public void Update(){

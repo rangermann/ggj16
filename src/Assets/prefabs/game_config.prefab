@@ -79,13 +79,21 @@ MonoBehaviour:
   followersToWin: 10
   followersMovementDuration: 0.2
   followersLineMovementSpeed: 2
-  playerHellFollowerInitialDelay: 8
+  playerHellFollowerInitialDelay: 5
   playerHellFollowerDelay: 0.7
+  playerHellPortalInitialDelay: 4
+  playerHellPortalScaleDelay: 1
+  playerHellScaleUpSpeed: 3
+  playerHellScaleUpDuration: 3
+  priestMovementDuration: 1
+  priestConversionPlayerSize: 0.6
+  priestScaleIncreasePerFollower: 0.1
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5
   levelGeneratorTrapsPerSection: 2
   levelGeneratorFollowersPerSection: 4
+  levelGeneratorPriestsPerSection: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

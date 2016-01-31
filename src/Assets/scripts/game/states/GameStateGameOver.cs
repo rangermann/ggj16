@@ -11,11 +11,11 @@ public class GameStateGameOver : AbstractState {
   }
 
   protected override void OnEnter(object onEnterParams = null) {
-
+    GameController.Instance.Player.IsMoving = false;
   }
 
   protected override void OnLeave() {
-
+    GameController.Instance.KillPlayer();
   }
 
   protected override void OnUpdate() {
