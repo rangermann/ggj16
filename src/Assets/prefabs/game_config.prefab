@@ -80,7 +80,7 @@ MonoBehaviour:
   followersMovementDuration: 0.2
   followersLineMovementSpeed: 2
   playerHellFollowerInitialDelay: 8
-  playerHellFollowerDelay: 0.2
+  playerHellFollowerDelay: 0.7
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5

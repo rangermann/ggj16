@@ -58,6 +58,7 @@ public class GameStateLevelFinished : AbstractState {
     var player = GameController.Instance.Player;
     player.ClearFollowers();
     GameObject.Destroy(player.gameObject);
+    GameController.Instance.Player = null;
 
     // destroy hell effect
     GameObject.Destroy(GoHellEffect);
