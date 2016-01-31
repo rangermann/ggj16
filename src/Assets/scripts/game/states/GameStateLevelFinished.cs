@@ -25,15 +25,12 @@ public class GameStateLevelFinished : AbstractState {
     Rigidbody2D rigidbody = GameController.Instance.Player.GetComponent<Rigidbody2D>();
     SpinCoroutine = GameController.Instance.StartCoroutine(SpinPlayer(rigidbody));
 
-	AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
-	AudioClip clip = GameConfig.win_loop;
-	audio.Stop();
-	audio.clip = clip;
-	audio.Play();
-
-
-	
-
+    GameConfig = GameController.Instance.GameConfig;
+    AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
+    AudioClip clip = GameConfig.win_loop;
+    audio.Stop();
+    audio.clip = clip;
+    audio.Play();
   }
 
   private IEnumerator SpinPlayer(Rigidbody2D rigidbody) {
