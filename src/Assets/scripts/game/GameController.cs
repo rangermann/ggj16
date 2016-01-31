@@ -31,6 +31,12 @@ public class GameController : MonoBehaviour {
 
   [SerializeField]
   private GameObject prefabFollowerLineRenderer;
+  
+  [SerializeField]
+  private GameObject prefabPriestObstacle;
+
+  [SerializeField]
+  private GameObject prefabExplosion1;
 
   [SerializeField]
   private Background background;
@@ -113,6 +119,18 @@ public class GameController : MonoBehaviour {
   public GameObject PrefabTrapObstacle {
     get {
       return prefabTrapObstacle;
+    }
+  }
+  
+  public GameObject PrefabPriestObstacle {
+    get {
+      return prefabPriestObstacle;
+    }
+  }
+
+  public GameObject PrefabExplosion1 {
+    get {
+      return prefabExplosion1;
     }
   }
 

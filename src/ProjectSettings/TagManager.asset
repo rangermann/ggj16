@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Follower
   - SpawnPoint
+  - Priest
   layers:
   - Default
   - TransparentFX

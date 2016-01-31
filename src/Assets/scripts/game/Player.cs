@@ -15,9 +15,11 @@ public class Player : MonoBehaviour {
   private Rigidbody2D rigidBody;
 
   private GameConfig GameConfig { get; set; }
+  private bool didCollideWithDeathZone;
 
   public List<Follower> Followers { get; private set; }
-
+  public List<PriestObstacle> Priests { get; private set; }
+  public List<PriestObstacle> PriestsToMove { get; private set; }
   public Dictionary<Follower, Transform> FollowerTransforms { get; private set; }
 
   private bool isMoving;
@@ -35,8 +37,12 @@ public class Player : MonoBehaviour {
     GameConfig = GameController.Instance.GameConfig;
     rigidBody = GetComponent<Rigidbody2D>();
     Followers = new List<Follower>();
+    Priests = new List<PriestObstacle> ();
+    PriestsToMove = new List<PriestObstacle> ();
+
     FollowerTransforms = new Dictionary<Follower, Transform>();
     IsMoving = true;
+    didCollideWithDeathZone = false;
   }
 
   // Update is called once per frame
@@ -59,22 +65,86 @@ public class Player : MonoBehaviour {
       } else if (scaleUp && currentLocalScale < GameConfig.playerMaxScale) {
         scaleFactor = GameConfig.playerScaleUpFactor;
       }
-      transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+      IncreaseScaleBy(scaleFactor);
     } else {
       //if (Input.GetMouseButtonDown(0)) {
       if (Input.GetButtonDown("SimpleButton")) {
         if (currentLocalScale > GameConfig.playerMinScale) {
-          scaleFactor = -GameConfig.playerScaleDownFactorSP;
-          transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+          IncreaseScaleBy(-GameConfig.playerScaleDownFactorSP);
         }
       } else {
         if (currentLocalScale < GameConfig.playerMaxScale) {
-          scaleFactor = GameConfig.playerScaleUpFactorSP;
-          transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
+          IncreaseScaleBy(GameConfig.playerScaleUpFactorSP);
         }
       }
       //transform.localScale += new Vector3 (scaleFactor  Time.deltaTime, scaleFactor  Time.deltaTime, 0);
     }
+
+    UpdatePriests ();
+
+    didCollideWithDeathZone = false;
+  }
+
+  public void DidCollideWithDeathZone(){
+    didCollideWithDeathZone = true;
+  }
+
+  public void AddPriest(PriestObstacle priest){
+    Priests.Add (priest);
+  }
+
+  public void MovePriest(PriestObstacle priest) {
+    PriestsToMove.Add (priest);
+  }
+
+  private void UpdatePriests(){
+    GameConfig gameConfig = GameController.Instance.GameConfig;
+
+    if (GetScale () < gameConfig.priestConversionPlayerSize) {
+      Debug.Log ("Minimum scale achieved - Adding priests as followers");
+
+      Priests.ForEach (priest => {
+        GameObject goFollower = GameObject.Instantiate (GameController.Instance.PrefabFollower);
+        Follower follower = goFollower.GetComponent<Follower> () as Follower;
+
+        follower.transform.position = priest.transform.position;
+
+        AddFollower (follower, false);
+        RegroupFollowers ();
+
+        priest.DestroyPriest ();
+      });
+
+      Priests.Clear ();
+      PriestsToMove.Clear ();
+    } else {
+      PriestsToMove.ForEach (priest => {
+        priest.transform.position = transform.position;
+      });
+    }
+
+    if (didCollideWithDeathZone) {
+      if (Priests.Count > 0) {
+        PriestObstacle priest = Priests [0];
+        RemovePriest (priest);
+      }
+    }
+
+    IncreaseScaleBy (gameConfig.priestScaleIncreasePerFollower * Followers.Count * Priests.Count);
+  }
+
+  private void RemovePriest(PriestObstacle priest){
+    Priests.Remove (priest);
+
+    if (PriestsToMove.Contains (priest)) {
+      PriestsToMove.Remove (priest);
+    }
+
+    priest.DetachFromPlayer ();
+  }
+
+  public void IncreaseScaleBy(float scaleFactor) {
+    transform.localScale += new Vector3(scaleFactor * Time.deltaTime, scaleFactor * Time.deltaTime, 0);
   }
 
   public void FixedUpdate() {
@@ -100,15 +170,15 @@ public class Player : MonoBehaviour {
     velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
     rigidBody.velocity = velocity;
   }
+  
+  public float GetScale() {
+    return transform.localScale.x;
+  }
 
   private float GetCameraX() {
     Vector2 cameraPosition = GameController.Instance.TransformLevelCamera.position;
 
     return cameraPosition.x;
-  }
-
-  private float GetScale() {
-    return transform.localScale.x;
   }
 
   private float GetCurrentX() {

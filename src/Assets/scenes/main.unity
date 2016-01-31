@@ -400,10 +400,6 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
-      propertyPath: transformLevelCamera
-      value: 
-      objectReference: {fileID: 248699608}
-    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
       propertyPath: gameConfig
       value: 
       objectReference: {fileID: 1620575934}
@@ -415,6 +411,14 @@ Prefab:
       propertyPath: background
       value: 
       objectReference: {fileID: 347728155}
+    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
+      propertyPath: transformLevelCamera
+      value: 
+      objectReference: {fileID: 248699608}
+    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
+      propertyPath: prefabExplosion1
+      value: 
+      objectReference: {fileID: 159168, guid: c49676a3f74274f3d937f6aeb27473d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
   m_IsPrefabParent: 0
@@ -565,6 +569,30 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 419246, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: levelGeneratorTrapsPerSection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: levelGeneratorFollowersPerSection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: levelGeneratorPriestsPerSection
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: priestMovementDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: priestScaleIncrease
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
+      propertyPath: priestConversionPlayerSize
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
