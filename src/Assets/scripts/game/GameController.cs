@@ -41,6 +41,9 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private GameObject endScreen;
 
+  [SerializeField]
+  private GameObject prefabHellEffect;
+
   #endregion
 
   private static GameController instance;
@@ -122,6 +125,12 @@ public class GameController : MonoBehaviour {
 			return endScreen;
 		}
 	}
+
+  public GameObject PrefabHellEffect {
+    get {
+      return prefabHellEffect;
+    }
+  }
 
   public void Awake() {
     instance = this;

@@ -20,15 +20,32 @@ public class Player : MonoBehaviour {
 
   public Dictionary<Follower, Transform> FollowerTransforms { get; private set; }
 
+  private bool isMoving;
+  public bool IsMoving {
+    get {
+      return isMoving;
+    }
+    set {
+      rigidBody.velocity = Vector2.zero;
+      isMoving = value;
+    }
+  }
+
   public void Awake() {
     GameConfig = GameController.Instance.GameConfig;
     rigidBody = GetComponent<Rigidbody2D>();
     Followers = new List<Follower>();
     FollowerTransforms = new Dictionary<Follower, Transform>();
+    IsMoving = true;
   }
 
   // Update is called once per frame
   public void Update() {
+    
+    if (IsMoving == false) {
+      return;
+    }
+
     float currentLocalScale = GetScale();
     float scaleFactor = 0;
 
@@ -61,6 +78,10 @@ public class Player : MonoBehaviour {
   }
 
   public void FixedUpdate() {
+    if (IsMoving == false) {
+      return;
+    }
+
     float normedScale = 1 - (GetScale() * GameConfig.playerScaleImpact - GameConfig.playerMinScale) / GameConfig.playerMaxScale;
     float speedVariation = normedScale * (GameConfig.playerMaxVelocityDelta - GameConfig.playerMinVelocityDelta) + GameConfig.playerMinVelocityDelta;
 
