@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
       return isMoving;
     }
     set {
+      rigidBody.angularVelocity = 0;
       rigidBody.velocity = Vector2.zero;
       isMoving = value;
     }

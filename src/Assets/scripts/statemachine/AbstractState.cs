@@ -20,13 +20,15 @@ public abstract	class AbstractState {
     OnInitialize();
 
     if (Panel != null) {
-      //NGUITools.SetActive(Panel.gameObject, false);
+      Panel.Init();
+      Panel.gameObject.SetActive(false);
     }
   }
 
   public void Enter(object onEnterParams = null) {
     if (Panel != null) {
-      //NGUITools.SetActive(Panel.gameObject, true);
+      Panel.gameObject.SetActive(true);
+      Panel.Enter(onEnterParams);
     }
 
     OnEnter(onEnterParams);
@@ -34,7 +36,8 @@ public abstract	class AbstractState {
 
   public void Leave() {
     if (Panel != null) {
-      //NGUITools.SetActive(Panel.gameObject, false);
+      Panel.gameObject.SetActive(false);
+      Panel.Leave();
     }
     OnLeave();
   }

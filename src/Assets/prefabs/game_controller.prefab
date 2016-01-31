@@ -52,7 +52,7 @@ MonoBehaviour:
   background: {fileID: 0}
   startScreen: {fileID: 106080, guid: b9ca300e913cb4980824b17d4589eb6c, type: 2}
   endScreen: {fileID: 106080, guid: b9ca300e913cb4980824b17d4589eb6c, type: 2}
-  prefabHellEffect: {fileID: 159168, guid: c49676a3f74274f3d937f6aeb27473d0, type: 2}
+  prefabHellEffect: {fileID: 165658, guid: 5cc5df2da7cff5d40a1504f6f248c2e2, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

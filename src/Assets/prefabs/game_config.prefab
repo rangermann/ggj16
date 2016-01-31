@@ -79,8 +79,12 @@ MonoBehaviour:
   followersToWin: 10
   followersMovementDuration: 0.2
   followersLineMovementSpeed: 2
-  playerHellFollowerInitialDelay: 8
+  playerHellFollowerInitialDelay: 5
   playerHellFollowerDelay: 0.7
+  playerHellPortalInitialDelay: 4
+  playerHellPortalScaleDelay: 1
+  playerHellScaleUpSpeed: 3
+  playerHellScaleUpDuration: 3
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5

@@ -7,6 +7,7 @@ public class DeathZone : MonoBehaviour {
     if (other.tag == "Follower") {
       Follower follower = other.GetComponent<Follower>();
       GameController.Instance.Player.RemoveFollower(follower);
+      GameController.Instance.Player.RegroupFollowers();
 
       // push the player to max velocity
       GameController.Instance.Player.PushForward();
