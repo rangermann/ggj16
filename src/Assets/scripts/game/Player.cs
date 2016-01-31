@@ -188,7 +188,7 @@ public class Player : MonoBehaviour {
     velocity.x = GameConfig.cameraMovementSpeed + speedVariation;
     rigidBody.velocity = velocity;
   }
-  
+
   public float GetScale() {
     return transform.localScale.x;
   }
@@ -254,7 +254,8 @@ public class Player : MonoBehaviour {
 
       FollowerTransforms[follower].name = "follower_mount_" + i;
       FollowerTransforms[follower].localPosition = new Vector2(x, y);
-      FollowerTransforms[follower].rotation = Quaternion.Euler(0, 0, -angle * Mathf.Rad2Deg);
+      //FollowerTransforms[follower].rotation = Quaternion.Euler(0, 0, -angle * Mathf.Rad2Deg);
+      FollowerTransforms[follower].rotation = Quaternion.FromToRotation(Vector3.down, transform.position - FollowerTransforms[follower].position);
     }
 
     Followers.ForEach(follower => {
