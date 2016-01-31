@@ -59,6 +59,7 @@ public class GameConfig : MonoBehaviour {
 	public AudioClip metal_loop;
 	public AudioClip title_loop;
 	public AudioClip win_loop;
+	public int changeMusicFollowerCount = 5;
    //private AudioSource audio;
    [Header("Game Over")]
   public float gameOverDuration = 3;

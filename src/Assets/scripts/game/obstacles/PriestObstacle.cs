@@ -66,7 +66,7 @@ public class PriestObstacle : AbstractObstacle {
     if (!isDestroyed) {
       player.MovePriest (this);
     } else {
-      Debug.Log ("Will not add destroyed Priest");
+      //Debug.Log ("Will not add destroyed Priest");
     }
 
     IsMoving = false;

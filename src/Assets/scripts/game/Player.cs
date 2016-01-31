@@ -102,7 +102,7 @@ public class Player : MonoBehaviour {
     GameConfig gameConfig = GameController.Instance.GameConfig;
 
     if (GetScale () < gameConfig.priestConversionPlayerSize) {
-      Debug.Log ("Minimum scale achieved - Adding priests as followers");
+      //Debug.Log ("Minimum scale achieved - Adding priests as followers");
 
       List<PriestObstacle> priestsToRemove = new List<PriestObstacle>();
       
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour {
 
   public void AddFollower(Follower follower, bool snap = false) {
     string followerName = "follower_" + (Followers.Count + 1);
-    Debug.Log("Adding follower");
+    //Debug.Log("Adding follower");
     follower.name = followerName;
     Followers.Add(follower);
 
@@ -219,7 +219,7 @@ public class Player : MonoBehaviour {
   }
 
   public void RemoveFollower(Follower follower) {
-    Debug.Log("Removing follower " + follower.name);
+    //Debug.Log("Removing follower " + follower.name);
     if(FollowerTransforms.ContainsKey(follower)) {
       GameObject.Destroy(FollowerTransforms[follower].gameObject);
       FollowerTransforms.Remove(follower);
