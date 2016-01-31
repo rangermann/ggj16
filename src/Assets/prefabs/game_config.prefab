@@ -87,13 +87,20 @@ MonoBehaviour:
   playerHellScaleUpDuration: 3
   priestMovementDuration: 1
   priestConversionPlayerSize: 0.6
-  priestScaleIncreasePerFollower: 0.1
+  priestScaleIncreasePerFollower: 0.03
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5
   levelGeneratorTrapsPerSection: 2
   levelGeneratorFollowersPerSection: 4
   levelGeneratorPriestsPerSection: 2
+  intro_choir_soft: {fileID: 8300000, guid: 978991667c2cf401f9d84239e774d5c6, type: 3}
+  choir_loop: {fileID: 8300000, guid: 249ea40249d6140e5bdb1b66a0c1f87b, type: 3}
+  into_choir_hard: {fileID: 8300000, guid: 17706dd07ec2541909c4e741694cd9ea, type: 3}
+  intro_metal: {fileID: 8300000, guid: 7ae9f38d958e4438388e3abde06b0a67, type: 3}
+  metal_loop: {fileID: 8300000, guid: c50586a78dae44b3c9e611025022c8fe, type: 3}
+  title_loop: {fileID: 8300000, guid: 958a8b94f471548918c4ea2830740ffd, type: 3}
+  win_loop: {fileID: 8300000, guid: 5c85e798c1cbb43fd817d0777055b612, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

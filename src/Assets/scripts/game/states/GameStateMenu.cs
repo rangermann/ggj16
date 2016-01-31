@@ -8,6 +8,8 @@ using UnityEngine;
 public class GameStateMenu : AbstractState {
 
   private Player FakePlayer { get; set; }
+ private GameConfig GameConfig { get; set; }
+
 
   public GameStateMenu(string stateName, AbstractPanelDeclaration panel)
     : base(stateName, panel) {
@@ -15,10 +17,20 @@ public class GameStateMenu : AbstractState {
 
   protected override void OnInitialize() {
     //GameObject.Instantiate(GameController.Instance.StartScreen, Vector3.zero, Quaternion.identity);
+		GameConfig = GameController.Instance.GameConfig;
   }
 
   protected override void OnEnter(object onEnterParams = null) {
     GameController.Instance.Background.Reset();
+
+	AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
+
+		AudioClip clip = GameConfig.title_loop;
+		audio.Stop();
+		audio.clip = clip;
+		audio.Play();
+
+
     //GameController.Instance.Background.Start();
 
     // create fake player

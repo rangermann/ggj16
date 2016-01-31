@@ -50,5 +50,16 @@ public class GameConfig : MonoBehaviour {
   
   public int levelGeneratorPriestsPerSection = 2;
 
+
+  [Header("Background Music")]
+	public AudioClip intro_choir_soft; 
+	public AudioClip choir_loop; 
+	public AudioClip into_choir_hard; 
+	public AudioClip intro_metal;
+	public AudioClip metal_loop;
+	public AudioClip title_loop;
+	public AudioClip win_loop;
+   //private AudioSource audio;
+
 }
 

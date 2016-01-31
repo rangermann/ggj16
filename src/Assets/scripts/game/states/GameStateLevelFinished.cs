@@ -9,6 +9,8 @@ public class GameStateLevelFinished : AbstractState {
 
   private Coroutine SpinCoroutine { get; set; }
 
+  private GameConfig GameConfig { get; set; }
+
 
   public GameStateLevelFinished(string stateName)
     : base(stateName) {
@@ -22,6 +24,16 @@ public class GameStateLevelFinished : AbstractState {
     // rotate player
     Rigidbody2D rigidbody = GameController.Instance.Player.GetComponent<Rigidbody2D>();
     SpinCoroutine = GameController.Instance.StartCoroutine(SpinPlayer(rigidbody));
+
+	AudioSource audio = GameObject.Find("background_music").GetComponent<AudioSource>();
+	AudioClip clip = GameConfig.win_loop;
+	audio.Stop();
+	audio.clip = clip;
+	audio.Play();
+
+
+	
+
   }
 
   private IEnumerator SpinPlayer(Rigidbody2D rigidbody) {

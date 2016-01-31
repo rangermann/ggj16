@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using System.Collections;
 
 public class GameStatePlaying : AbstractState {
 
@@ -10,7 +11,9 @@ public class GameStatePlaying : AbstractState {
 
   private GameConfig GameConfig { get; set; }
 
-  public GameStatePlaying(string stateName)
+  private int internalFollowerCount = 0;  
+
+	public GameStatePlaying(string stateName)
     : base(stateName) {
   }
 
@@ -18,7 +21,41 @@ public class GameStatePlaying : AbstractState {
     GameConfig = GameController.Instance.GameConfig;
   }
 
+
+	IEnumerator playEngineSound()
+	{
+		GameObject.Find ("background_music").GetComponent<AudioSource> ().loop = true;
+		 
+			AudioSource audio = GameObject.Find ("background_music").GetComponent<AudioSource> ();
+
+			if(internalFollowerCount<7) {
+
+			AudioClip clip = GameConfig.intro_choir_soft;
+			audio.Stop ();
+			audio.clip = clip;
+			audio.Play ();
+			yield return new WaitForSeconds (audio.clip.length - 0.3f);
+			audio.clip = GameConfig.choir_loop;
+			audio.Play ();
+		}
+			else if(internalFollowerCount>7){
+			
+				//audio.Stop ();
+			    audio.clip = GameConfig.intro_metal;
+				audio.Play ();
+				yield return new WaitForSeconds (audio.clip.length - 0.3f);
+				audio.clip = GameConfig.metal_loop;
+				audio.Play ();
+			
+			}
+
+	}
+
   protected override void OnEnter(object onEnterParams = null) {
+	internalFollowerCount = 3; 
+
+	GameController.Instance.StartCoroutine(playEngineSound());
+
     // reset camera
     TransformLevelCamera = GameController.Instance.TransformLevelCamera;
     Vector3 camPos = TransformLevelCamera.position;
@@ -41,6 +78,8 @@ public class GameStatePlaying : AbstractState {
   }
 
   protected override void OnLeave() {
+
+	internalFollowerCount = 3;
     GameController.Instance.Background.Stop ();
 	  GameController.Instance.CurrentlyPlaying = false;
     GameController.Instance.Player.IsMoving = false;
@@ -50,8 +89,9 @@ public class GameStatePlaying : AbstractState {
   protected override void OnUpdate() {
     MoveCamera ();
 
+		var player = GameController.Instance.Player;
+		internalFollowerCount = player.Followers.Count;
     if (GameConfig.enableWinLoseConditions) {
-      var player = GameController.Instance.Player;
       if (player.Followers.Count < GameConfig.followersMin) {
         GameController.Instance.ChangeState("GameStateGameOver");
       } else if (player.Followers.Count >= GameConfig.followersToWin) {

@@ -10,13 +10,15 @@ public class UseDifferentAudioSequences : MonoBehaviour {
 	void Start () {
 		audio = GetComponent<AudioSource>();
 
+		audio.clip = intro_choir_soft;
+		audio.Play();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//audio.Stop();
-		audio.clip = intro_choir_soft;
-		audio.Play();
+
 		/*switch (objectStatus.GetState())
 		{
 		case 1: //Intro        
