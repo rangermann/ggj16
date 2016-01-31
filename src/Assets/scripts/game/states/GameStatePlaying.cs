@@ -42,14 +42,10 @@ public class GameStatePlaying : AbstractState {
   }
 
   protected override void OnLeave() {
-    // kill the player
-    var player = GameController.Instance.Player;
-    player.ClearFollowers();
-    GameObject.Destroy(player.gameObject);
-
     GameController.Instance.Background.Stop ();
 	GameController.Instance.CurrentlyPlaying = false;
 
+    GameController.Instance.Player.IsMoving = false;
   }
 
   protected override void OnUpdate() {

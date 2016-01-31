@@ -19,6 +19,7 @@ public class GameConfig : MonoBehaviour {
   public float playerMaxCameraOffset = 4f;
   public float playerScaleImpact = 1.5f;
   public bool controlByPress = false;
+  public AnimationCurve playerHellEffectSpinCurve;
 
   [Header("Followers")]
   public bool enableWinLoseConditions = true;
@@ -26,6 +27,8 @@ public class GameConfig : MonoBehaviour {
   public int followersToWin = 10;
   public float followersMovementDuration = 0.2f;
   public float followersLineMovementSpeed = 1f;
+  public float playerHellFollowerInitialDelay = 4;
+  public float playerHellFollowerDelay = 1;
 
   [Header("Background")]
   public float backgroundWidth = 29.0f;

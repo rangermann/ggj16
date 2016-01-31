@@ -53,11 +53,34 @@ MonoBehaviour:
   playerMaxCameraOffset: 4
   playerScaleImpact: 1.5
   controlByPress: 0
+  playerHellEffectSpinCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 3.1610827
+      value: -58.034138
+      inSlope: 16.789436
+      outSlope: 16.789436
+      tangentMode: 0
+    - time: 5
+      value: 300
+      inSlope: 17.809513
+      outSlope: 17.809513
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   enableWinLoseConditions: 1
   followersMin: 3
   followersToWin: 10
-  followersMovementSpeed: 6
+  followersMovementDuration: 0.2
   followersLineMovementSpeed: 2
+  playerHellFollowerInitialDelay: 8
+  playerHellFollowerDelay: 0.7
   backgroundWidth: 29
   backgroundScrollSpeed: 0.5
   levelGeneratorSectionPadding: 5
