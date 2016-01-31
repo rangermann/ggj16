@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour {
 
   #endregion
 
-  //private static GameController instance;
+  private static GameController instance;
 
   public static GameController Instance {
     get {
