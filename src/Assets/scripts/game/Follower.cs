@@ -48,7 +48,7 @@ public class Follower : MonoBehaviour {
     var startPosition = transform.position;
     //var distance = Vector3.Distance(startPosition, transformInCircle.position);
     var duration = gameConfig.followersMovementDuration;
-    
+
     float timeTaken = 0;
     while (timeTaken < duration) {
 
@@ -111,7 +111,7 @@ public class Follower : MonoBehaviour {
       lineRenderer.material.mainTextureScale = new Vector2(distance / 1.0f, 1);
     }
   }
-
+  
   public void RemoveFromCircle() {
     TransformInCircle = null;
     DestroyLineRenderers();

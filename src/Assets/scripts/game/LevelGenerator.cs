@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour {
   }
 
   public void StartGenerating(int seed) {
-    Random.seed = seed;
+    // Random.seed = seed;
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
   }
@@ -34,7 +34,8 @@ public class LevelGenerator : MonoBehaviour {
     currentSections.Clear();
     sectionStart = 0.0f;
     sectionEnd = 0.0f;
-    isFirstSection = true;
+    // isFirstSection = true;
+    isFirstSection = false;
   }
 
   public void Update() {
@@ -68,14 +69,17 @@ public class LevelGenerator : MonoBehaviour {
         for (int i = 0; i < gameConfig.levelGeneratorTrapsPerSection; i++) {
           spawnList.Add (GameController.Instance.PrefabTrapObstacle);
         }
+        
+        for (int i = 0; i < gameConfig.levelGeneratorPriestsPerSection; i++) {
+          spawnList.Add (GameController.Instance.PrefabPriestObstacle);
+        }
       }
 
       for (int i = 0; i < gameConfig.levelGeneratorFollowersPerSection; i++) {
         spawnList.Add (GameController.Instance.PrefabFollowerObstacle);
       }
-
+      spawnList.OrderBy( a => { return Random.value; });
       SpawnObstaclesInSection (section, spawnList);
-
     }
 
     bool sectionRemoved;
@@ -116,8 +120,8 @@ public class LevelGenerator : MonoBehaviour {
   private void SpawnObstaclesInSection(GameObject section, List<GameObject> types) {
     List<GameObject> spawnLocations = ExtractSpawnLocations (section);
     spawnLocations.OrderBy(a => Random.value);
-
-    for (int i = 0; i < Mathf.Min (spawnLocations.Count, types.Count); i++) {
+    int i;
+    for (i = 0; i < Mathf.Min (spawnLocations.Count, types.Count); i++) {
       GameObject obstacle = GameObject.Instantiate(types[i]);
 
       obstacle.transform.parent = section.transform;
