@@ -497,6 +497,14 @@ Prefab:
       propertyPath: transformLevelCamera
       value: 
       objectReference: {fileID: 248699608}
+    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
+      propertyPath: prefabExplosion1
+      value: 
+      objectReference: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
+    - target: {fileID: 11434264, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
+      propertyPath: prefabPriestExplosion
+      value: 
+      objectReference: {fileID: 114936, guid: 2c01e2ef0f2064dd9b26e99b6dc5ece0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8b05da48ef65a4f9d15270dd18760a, type: 2}
   m_IsPrefabParent: 0
@@ -791,10 +799,6 @@ Prefab:
     - target: {fileID: 419246, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11403232, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}
-      propertyPath: priestScaleIncreasePerFollower
-      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7afca9ac76dde4440b9e922c5c33e9ee, type: 2}

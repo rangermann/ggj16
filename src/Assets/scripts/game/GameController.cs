@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
   private GameObject prefabPriestObstacle;
 
   [SerializeField]
-  private GameObject prefabExplosion1;
+  private GameObject prefabPriestExplosion;
 
   [SerializeField]
   private Background background;
@@ -128,9 +128,9 @@ public class GameController : MonoBehaviour {
     }
   }
 
-  public GameObject PrefabExplosion1 {
+  public GameObject PrefabPriestExplosion {
     get {
-      return prefabExplosion1;
+      return prefabPriestExplosion;
     }
   }
 
