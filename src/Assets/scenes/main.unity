@@ -439,10 +439,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22430400, guid: f54f1794ed8eedc47a8a169e848f02fd, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f54f1794ed8eedc47a8a169e848f02fd, type: 2}
   m_IsPrefabParent: 0
@@ -891,18 +887,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7aea874d3dcf7e4daba84cbd07c6b9e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2068073072 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 117028, guid: b7aea874d3dcf7e4daba84cbd07c6b9e, type: 2}
-  m_PrefabInternal: {fileID: 2068073071}
---- !u!114 &2068073073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2068073072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bf5cd9d9df0804f9139b5e30cf9bc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
