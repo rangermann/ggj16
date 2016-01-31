@@ -41,9 +41,11 @@ public class GameController : MonoBehaviour {
   [SerializeField]
   private GameObject endScreen;
 
+
   #endregion
 
   private static GameController instance;
+
   public static GameController Instance {
     get {
       return instance;
@@ -51,6 +53,12 @@ public class GameController : MonoBehaviour {
   }
 
   private StateMachine StateMachine { get; set; }
+
+
+  public float RoundStartTime { get; set; }
+
+  public bool CurrentlyPlaying { get; set; }
+
 
   public GameObject PrefabPlayer {
     get {
@@ -123,6 +131,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(transform.parent.gameObject);
@@ -134,7 +143,7 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStateLevelFinished("GameStateLevelFinished"));
     // add more game states here
 
-		StateMachine = StateMachine.Create("state_machine", states, "GameStateLoading");
+	StateMachine = StateMachine.Create("state_machine", states, "GameStateLoading");
   }
 
   public void ChangeState(string stateName, object onEnterParams = null) {
